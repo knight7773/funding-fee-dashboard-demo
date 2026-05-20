@@ -1,0 +1,1798 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>资金费报表 - 新中台 HTML Demo</title>
+  <style>
+    :root {
+      --app-bg: #000000;
+      --surface: #050505;
+      --surface-soft: #08080a;
+      --surface-head: #1f1f22;
+      --sidebar: #050505;
+      --sidebar-panel: #111113;
+      --sidebar-active: #1e1f24;
+      --line: #23242a;
+      --line-strong: #373941;
+      --table-line: #15161a;
+      --text: #d7dae2;
+      --text-strong: #f5f6fa;
+      --muted: #8d929f;
+      --primary: #4d63df;
+      --primary-dark: #4054c2;
+      --cyan: #17a7d8;
+      --teal: #18aa9a;
+      --green: #20a66b;
+      --amber: #d39a0a;
+      --red: #c64553;
+      --violet: #8b61df;
+      --control-bg: #000000;
+      --control-text: #f1f2f5;
+      --metric-bg: #050505;
+      --table-bg: #000000;
+      --row-even: #030303;
+      --row-hover: #0b1018;
+      --button-reset-bg: #202020;
+      --button-reset-border: #393a42;
+      --button-edit-bg: #8a60dc;
+      --button-export-bg: #18b3a3;
+      --rule-bg: #062823;
+      --rule-border: #16594f;
+      --rule-text: #44d7c5;
+      --ok-text: #58e0b3;
+      --ok-bg: #08251f;
+      --ok-border: #1d8e6c;
+      --ok-shadow: inset 0 0 0 1px rgba(95, 231, 181, 0.1);
+      --tag-short-text: #58e0b3;
+      --tag-short-bg: #08251f;
+      --tag-short-border: #1d8e6c;
+      --tag-long-text: #ff7f92;
+      --tag-long-bg: #2b0c13;
+      --tag-long-border: #b44a5a;
+      --tag-charge-text: #6fb8ff;
+      --tag-charge-bg: #071b31;
+      --tag-charge-border: #2b73b9;
+      --tag-payout-text: #58d8c9;
+      --tag-payout-bg: #062320;
+      --tag-payout-border: #1d8e83;
+      --tag-maker-text: #b89cff;
+      --tag-maker-bg: #1a1130;
+      --tag-maker-border: #6e55c5;
+      --tag-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      --shadow: none;
+      color-scheme: dark;
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body[data-theme="light"] {
+      --app-bg: #f2f4f8;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fc;
+      --surface-head: #f3f5f8;
+      --line: #e5e8ef;
+      --line-strong: #d8dde7;
+      --table-line: #edf0f5;
+      --text: #1f2633;
+      --text-strong: #10151f;
+      --muted: #8a93a5;
+      --primary: #0879d8;
+      --primary-dark: #0667b8;
+      --violet: #695ee8;
+      --control-bg: #ffffff;
+      --control-text: #1f2633;
+      --metric-bg: #ffffff;
+      --table-bg: #ffffff;
+      --row-even: #fcfdff;
+      --row-hover: #f1f8ff;
+      --button-reset-bg: #202020;
+      --button-reset-border: #393a42;
+      --button-edit-bg: #8a60dc;
+      --button-export-bg: #18b3a3;
+      --rule-bg: #edf9f7;
+      --rule-border: #bfded9;
+      --rule-text: #0b7469;
+      --ok-text: #078660;
+      --ok-bg: #eafff4;
+      --ok-border: #aeeccb;
+      --ok-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+      --tag-short-text: #13795b;
+      --tag-short-bg: #eef9f4;
+      --tag-short-border: #c5ead8;
+      --tag-long-text: #bf2e3f;
+      --tag-long-bg: #fff0f2;
+      --tag-long-border: #f2c2ca;
+      --tag-charge-text: #075fa8;
+      --tag-charge-bg: #eaf5ff;
+      --tag-charge-border: #bfdcf4;
+      --tag-payout-text: #0b7469;
+      --tag-payout-bg: #e9f8f6;
+      --tag-payout-border: #bee4df;
+      --tag-maker-text: #594ad6;
+      --tag-maker-bg: #f0eeff;
+      --tag-maker-border: #d3cff9;
+      --tag-shadow: none;
+      --shadow: 0 8px 22px rgba(31, 38, 51, 0.06);
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--app-bg);
+      color: var(--text);
+      letter-spacing: 0;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      height: 58px;
+      padding: 0 22px;
+      background: #000000;
+      border-bottom: 1px solid #111111;
+    }
+
+    .top-logo {
+      display: flex;
+      align-items: center;
+      width: 278px;
+      height: 58px;
+      color: #ffffff;
+    }
+
+    .top-logo img {
+      display: block;
+      width: auto;
+      height: 40px;
+      max-width: 260px;
+      object-fit: contain;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+      height: 100%;
+    }
+
+    .top-icon-button {
+      display: inline-grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border: 0;
+      background: transparent;
+      color: #d7d9df;
+      outline: none;
+    }
+
+    .top-icon-button:hover,
+    .top-icon-button:focus-visible {
+      color: #ffffff;
+      background: #111216;
+    }
+
+    .top-icon-button svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+    }
+
+    .theme-moon {
+      display: none;
+    }
+
+    body[data-theme="light"] .theme-sun {
+      display: none;
+    }
+
+    body[data-theme="light"] .theme-moon {
+      display: block;
+    }
+
+    .top-divider {
+      width: 1px;
+      height: 46px;
+      margin: 0 12px;
+      background: #27282d;
+    }
+
+    .language-switch {
+      position: relative;
+      height: 58px;
+    }
+
+    .language-menu {
+      position: absolute;
+      top: 54px;
+      right: -64px;
+      z-index: 30;
+      display: none;
+      width: 178px;
+      padding: 6px;
+      border: 1px solid #34353c;
+      background: #222329;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
+    }
+
+    .language-switch.open .language-menu,
+    .language-switch:hover .language-menu,
+    .language-switch:focus-within .language-menu {
+      display: block;
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      color: #cfd2da;
+      padding: 0 12px;
+      font-size: 15px;
+      font-weight: 760;
+      text-align: left;
+    }
+
+    .language-option:hover,
+    .language-option.active {
+      color: #ffffff;
+      background: #303137;
+    }
+
+    .language-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    .language-option.active .language-dot {
+      background: #ffffff;
+    }
+
+    .top-avatar {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-left: 6px;
+      border: 2px solid #2c2d34;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 70% 30%, #29d2a0 0 13%, transparent 14%),
+        linear-gradient(135deg, #ffe3a6, #9a79ff 52%, #20c4ff);
+      color: #101116;
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .app-shell {
+      display: grid;
+      grid-template-columns: 232px minmax(0, 1fr);
+      min-height: calc(100vh - 58px);
+    }
+
+    .sidebar {
+      background: var(--sidebar);
+      color: #f4f6fa;
+      min-height: calc(100vh - 58px);
+      border-right: 1px solid #17181c;
+    }
+
+    .sidebar .brand {
+      display: none;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      height: 64px;
+      padding: 0 18px;
+      border-bottom: 1px solid #17181c;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid #304cff;
+      color: #ffffff;
+      background: #101b49;
+      font-size: 15px;
+      font-weight: 900;
+      margin-right: 10px;
+    }
+
+    .brand-text {
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .side-menu {
+      padding: 14px 0 28px;
+    }
+
+    .menu-group {
+      margin-bottom: 8px;
+    }
+
+    .menu-title,
+    .submenu-item {
+      display: flex;
+      align-items: center;
+      min-height: 42px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .menu-title {
+      padding: 0 18px;
+      color: #d7dae2;
+      font-size: 14px;
+      font-weight: 780;
+    }
+
+    .menu-title::after {
+      content: "⌄";
+      margin-left: auto;
+      color: #8b909d;
+      font-size: 16px;
+    }
+
+    .menu-group.open .menu-title::after {
+      content: "⌃";
+      color: #c1c7d6;
+    }
+
+    .submenu {
+      padding: 4px 0;
+    }
+
+    .submenu-item {
+      padding: 0 18px 0 38px;
+      color: #8f96a5;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .submenu-item.active {
+      color: #5f7cff;
+      background: var(--sidebar-active);
+      box-shadow: inset 3px 0 0 #5f7cff;
+    }
+
+    .content {
+      min-width: 0;
+      padding: 24px;
+      background: var(--app-bg);
+      overflow-x: auto;
+    }
+
+    .page {
+      min-width: 1180px;
+      max-width: 1760px;
+      margin: 0 auto;
+    }
+
+    .page-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    .title-wrap {
+      min-width: 0;
+    }
+
+    .kicker {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--text-strong);
+      font-size: 26px;
+      line-height: 1.25;
+      font-weight: 850;
+    }
+
+    .rule-note {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid var(--rule-border);
+      background: var(--rule-bg);
+      color: var(--rule-text);
+      font-size: 13px;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .workspace {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      min-height: 54px;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .tab-button {
+      position: relative;
+      min-height: 54px;
+      border: 0;
+      background: transparent;
+      color: #687285;
+      padding: 0 16px;
+      font-size: 15px;
+      font-weight: 820;
+    }
+
+    .tab-button.active {
+      color: var(--primary);
+    }
+
+    .tab-button.active::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: -1px;
+      height: 3px;
+      background: var(--primary);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .filters {
+      display: grid;
+      gap: 14px;
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .summary-filters {
+      grid-template-columns: 160px 150px minmax(290px, 1fr) repeat(4, 90px);
+      gap: 12px;
+    }
+
+    .detail-filters {
+      grid-template-columns: 125px 135px 135px 210px 110px repeat(4, 82px);
+      gap: 10px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #6f7787;
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .control,
+    .button {
+      width: 100%;
+      height: 46px;
+      border: 1px solid var(--line-strong);
+      background: var(--control-bg);
+      color: var(--control-text);
+      padding: 0 12px;
+      outline: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    select.control {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #9aa2b2 50%),
+        linear-gradient(135deg, #9aa2b2 50%, transparent 50%);
+      background-position:
+        calc(100% - 17px) 18px,
+        calc(100% - 11px) 18px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 34px;
+    }
+
+    .control:focus {
+      border-color: #7bb8ee;
+      box-shadow: 0 0 0 3px rgba(8, 121, 216, 0.12);
+    }
+
+    .date-range-control {
+      display: grid;
+      grid-template-columns: 1fr 18px 1fr;
+      gap: 8px;
+      align-items: center;
+      padding: 0 8px;
+    }
+
+    .date-range-control input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--control-text);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .date-arrow {
+      color: #9aa2b2;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .field-actions {
+      display: flex;
+      align-items: end;
+      gap: 10px;
+      padding-top: 19px;
+    }
+
+    .action-row {
+      display: contents;
+    }
+
+    .action-row .button {
+      width: 100%;
+      align-self: end;
+    }
+
+    .button {
+      height: 46px;
+      border-color: transparent;
+      color: #ffffff;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 820;
+    }
+
+    .button.primary {
+      background: var(--primary);
+    }
+
+    .button.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button.reset {
+      color: #d9d9df;
+      border-color: var(--button-reset-border);
+      background: var(--button-reset-bg);
+    }
+
+    .button.indicator {
+      background: var(--button-edit-bg);
+    }
+
+    .button.export {
+      background: var(--button-export-bg);
+    }
+
+    .button.ghost {
+      color: #546072;
+      border-color: var(--line-strong);
+      background: var(--control-bg);
+    }
+
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      padding: 18px 20px;
+      background: var(--surface-soft);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .metric {
+      position: relative;
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: var(--metric-bg);
+      padding: 16px 18px;
+      border-radius: 6px;
+    }
+
+    .metric-label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #687285;
+      font-size: 13px;
+      font-weight: 760;
+      cursor: help;
+    }
+
+    .metric-label::after {
+      content: "?";
+      display: inline-grid;
+      place-items: center;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 850;
+    }
+
+    .metric-label[data-tooltip]:hover::before,
+    .metric-label[data-tooltip]:focus-visible::before {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 0;
+      top: calc(100% + 10px);
+      z-index: 15;
+      width: max-content;
+      max-width: 280px;
+      padding: 10px 12px;
+      border: 1px solid #3d3f48;
+      background: #222329;
+      color: #f4f5f8;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.34);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 720;
+      white-space: normal;
+    }
+
+    body[data-theme="light"] .metric-label[data-tooltip]:hover::before,
+    body[data-theme="light"] .metric-label[data-tooltip]:focus-visible::before {
+      border-color: #cfd5df;
+      background: #ffffff;
+      color: #1f2633;
+    }
+
+    .metric-value {
+      margin-top: 8px;
+      color: var(--text-strong);
+      font-size: 25px;
+      line-height: 1.1;
+      font-weight: 880;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-value.charge {
+      color: var(--primary);
+    }
+
+    .metric-value.payout {
+      color: var(--teal);
+    }
+
+    .metric-value.maker {
+      color: var(--violet);
+    }
+
+    .metric-sub {
+      display: none;
+    }
+
+    .table-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .table-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-strong);
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .table-title::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .table-meta {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--table-bg);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .summary-table {
+      min-width: 1120px;
+    }
+
+    .detail-table {
+      min-width: 1480px;
+    }
+
+    thead {
+      background: var(--surface-head);
+      color: var(--text-strong);
+    }
+
+    th,
+    td {
+      height: 58px;
+      border-bottom: 1px solid var(--table-line);
+      border-right: 1px solid var(--table-line);
+      padding: 0 12px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--row-even);
+    }
+
+    tbody tr:hover {
+      background: var(--row-hover);
+    }
+
+    .left {
+      text-align: left;
+    }
+
+    .num {
+      text-align: right;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .unit {
+      margin-left: 2px;
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .money-charge {
+      color: var(--primary);
+    }
+
+    .money-payout {
+      color: var(--teal);
+    }
+
+    .money-maker {
+      color: var(--violet);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .tag.ok {
+      min-width: 62px;
+      height: 34px;
+      color: var(--ok-text);
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+      box-shadow: var(--ok-shadow);
+      font-size: 13px;
+    }
+
+    .tag.charge {
+      color: var(--tag-charge-text);
+      background: var(--tag-charge-bg);
+      border: 1px solid var(--tag-charge-border);
+      box-shadow: var(--tag-shadow);
+    }
+
+    .tag.payout {
+      color: var(--tag-payout-text);
+      background: var(--tag-payout-bg);
+      border: 1px solid var(--tag-payout-border);
+      box-shadow: var(--tag-shadow);
+    }
+
+    .tag.maker {
+      color: var(--tag-maker-text);
+      background: var(--tag-maker-bg);
+      border: 1px solid var(--tag-maker-border);
+      box-shadow: var(--tag-shadow);
+    }
+
+    .tag.long {
+      color: var(--tag-long-text);
+      background: var(--tag-long-bg);
+      border: 1px solid var(--tag-long-border);
+      box-shadow: var(--tag-shadow);
+    }
+
+    .tag.short {
+      color: var(--tag-short-text);
+      background: var(--tag-short-bg);
+      border: 1px solid var(--tag-short-border);
+      box-shadow: var(--tag-shadow);
+    }
+
+    .link-button {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      padding: 0;
+      font-size: 14px;
+      font-weight: 820;
+    }
+
+    .link-button:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .empty {
+      display: none;
+      padding: 44px 20px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 760;
+      background: var(--table-bg);
+    }
+
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 14px 20px 18px;
+      color: #626b7b;
+      font-size: 13px;
+      font-weight: 720;
+      background: var(--surface);
+    }
+
+    .pager-control {
+      display: inline-grid;
+      place-items: center;
+      min-width: 30px;
+      height: 30px;
+      border: 1px solid var(--line-strong);
+      background: var(--control-bg);
+      color: #647084;
+      border-radius: 4px;
+      padding: 0 8px;
+      font-weight: 760;
+    }
+
+    .pager-control.active {
+      color: #ffffff;
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .hint-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-top: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: #6b7484;
+      font-size: 13px;
+      font-weight: 680;
+    }
+
+    .hint-line strong {
+      color: var(--text-strong);
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      display: none;
+      max-width: 360px;
+      border: 1px solid #bfe8d4;
+      background: #edf9f3;
+      color: #116546;
+      padding: 12px 14px;
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+      font-weight: 760;
+      z-index: 20;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        min-height: auto;
+      }
+
+      .side-menu {
+        display: none;
+      }
+
+      .content {
+        padding: 14px;
+      }
+
+      .page {
+        min-width: 0;
+      }
+
+      .page-head,
+      .table-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .workspace {
+        min-width: 0;
+      }
+
+      .summary-filters,
+      .detail-filters,
+      .summary-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .field-actions {
+        padding-top: 0;
+      }
+
+      .action-row {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .action-row .button {
+        width: 100%;
+      }
+
+      .tabs {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <header class="topbar" aria-label="全局顶部菜单">
+    <a class="top-logo" href="#" aria-label="AX 首页">
+      <img src="assets/AE_Logo_white_H.png" alt="AX logo">
+    </a>
+    <div class="top-actions">
+      <button id="themeToggle" class="top-icon-button" type="button" aria-label="切换亮暗色">
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" stroke-width="1.8"/>
+          <path d="M12 2.3v3M12 18.7v3M2.3 12h3M18.7 12h3M5.1 5.1l2.1 2.1M16.8 16.8l2.1 2.1M18.9 5.1l-2.1 2.1M7.2 16.8l-2.1 2.1" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20.2 14.3A7.7 7.7 0 0 1 9.7 3.8A8.9 8.9 0 1 0 20.2 14.3Z" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div id="languageSwitch" class="language-switch">
+        <button id="languageToggle" class="top-icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="切换语言">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke-width="1.8"/>
+            <path d="M3.4 12h17.2M12 3c2.4 2.5 3.7 5.5 3.7 9S14.4 18.5 12 21M12 3c-2.4 2.5-3.7 5.5-3.7 9s1.3 6.5 3.7 9" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="language-menu" role="menu" aria-label="语言">
+          <button class="language-option active" type="button" role="menuitemradio" aria-checked="true" data-lang="zh-CN"><span class="language-dot"></span>简体中文</button>
+          <button class="language-option" type="button" role="menuitemradio" aria-checked="false" data-lang="en"><span class="language-dot"></span>English</button>
+        </div>
+      </div>
+      <span class="top-divider" aria-hidden="true"></span>
+      <div class="top-avatar" aria-label="当前用户">PM</div>
+    </div>
+  </header>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="新中台主菜单">
+      <div class="brand">
+        <span class="brand-mark">AX</span>
+        <span class="brand-text">新中台</span>
+      </div>
+      <nav class="side-menu">
+        <div class="menu-group open">
+          <div class="menu-title">用户管理</div>
+          <div class="submenu">
+            <a class="submenu-item" href="#">用户列表</a>
+            <a class="submenu-item" href="#">邀请列表</a>
+            <a class="submenu-item" href="#">登录日志</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <div class="menu-title">合约配置</div>
+        </div>
+        <div class="menu-group">
+          <div class="menu-title">合约原始数据</div>
+        </div>
+        <div class="menu-group">
+          <div class="menu-title">LP 原始数据</div>
+        </div>
+        <div class="menu-group">
+          <div class="menu-title">运营工具</div>
+        </div>
+        <div class="menu-group">
+          <div class="menu-title">资金账单</div>
+        </div>
+        <div class="menu-group open">
+          <div class="menu-title">财务报表</div>
+          <div class="submenu">
+            <a class="submenu-item" href="#">手续费报表</a>
+            <a class="submenu-item active" href="#" aria-current="page">资金费报表</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <div class="menu-title">交易所钱流</div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div class="page">
+        <header class="page-head">
+          <div class="title-wrap">
+            <p class="kicker">财务报表 / 资金费报表</p>
+            <h1>资金费报表</h1>
+          </div>
+          <div class="rule-note">账务校验：对用户收取 = 对用户支出 + 做市收取</div>
+        </header>
+
+        <section class="workspace" aria-label="资金费报表工作区">
+          <div class="tabs" role="tablist" aria-label="资金费视图">
+            <button id="summaryTab" class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="summaryPanel">资金费汇总</button>
+            <button id="detailTab" class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="detailPanel">资金费明细</button>
+          </div>
+
+          <section id="summaryPanel" class="tab-panel active" role="tabpanel" aria-labelledby="summaryTab">
+            <div class="filters summary-filters" aria-label="汇总筛选">
+              <label class="field">
+                <span class="field-label">标的</span>
+                <select id="summarySymbol" class="control">
+                  <option value="">全部标的</option>
+                  <option value="BTC_USDT">BTC_USDT</option>
+                  <option value="ETH_USDT">ETH_USDT</option>
+                  <option value="SOL_USDT">SOL_USDT</option>
+                  <option value="XRP_USDT">XRP_USDT</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">日期</span>
+                <input id="summaryDate" class="control" type="date" value="2026-05-19">
+              </label>
+              <label class="field">
+                <span class="field-label">时间范围</span>
+                <span class="control date-range-control">
+                  <input id="summaryStart" type="date" value="2026-05-18" aria-label="开始日期">
+                  <span class="date-arrow">→</span>
+                  <input id="summaryEnd" type="date" value="2026-05-20" aria-label="结束日期">
+                </span>
+              </label>
+              <div class="action-row" aria-label="汇总操作">
+                <button id="summaryReset" class="button reset" type="button">重置</button>
+                <button id="summaryEdit" class="button indicator" type="button">指标编辑</button>
+                <button id="summarySearch" class="button primary" type="button">查询</button>
+                <button id="summaryExport" class="button export" type="button">导出</button>
+              </div>
+            </div>
+
+            <div class="summary-strip" aria-label="汇总指标">
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="按当前筛选汇总，单位 USDT">对用户收取</div>
+                <div id="metricCharge" class="metric-value charge">0.0000</div>
+                <div class="metric-sub">按当前筛选汇总，单位 USDT</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="用户收到的资金费合计，单位 USDT">对用户支出</div>
+                <div id="metricPayout" class="metric-value payout">0.0000</div>
+                <div class="metric-sub">用户收到的资金费合计</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="对用户收取与对用户支出的差额归集，单位 USDT">做市收取</div>
+                <div id="metricMaker" class="metric-value maker">0.0000</div>
+                <div class="metric-sub">收取与支出差额归集</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="校验公式：对用户收取 - 对用户支出 - 做市收取 = 0">账务校验</div>
+                <div id="metricCheck" class="metric-value">通过</div>
+                <div class="metric-sub">收取 - 支出 - 做市收取 = 0</div>
+              </div>
+            </div>
+
+            <div class="table-toolbar">
+              <div class="table-title">每日三轮资金费汇总</div>
+              <div id="summaryMeta" class="table-meta">共 0 条记录</div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="summary-table" aria-label="资金费汇总表">
+                <colgroup>
+                  <col style="width: 64px">
+                  <col style="width: 112px">
+                  <col style="width: 104px">
+                  <col style="width: 128px">
+                  <col style="width: 112px">
+                  <col style="width: 146px">
+                  <col style="width: 146px">
+                  <col style="width: 146px">
+                  <col style="width: 96px">
+                  <col style="width: 92px">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>日期</th>
+                    <th>轮次时间</th>
+                    <th>标的</th>
+                    <th>资金费率</th>
+                    <th>对用户收取</th>
+                    <th>对用户支出</th>
+                    <th>做市收取</th>
+                    <th>校验</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="summaryBody"></tbody>
+              </table>
+              <div id="summaryEmpty" class="empty">暂无匹配的资金费汇总数据</div>
+            </div>
+            <div class="pager">
+              <span id="summaryPagerCount">共 0 条</span>
+              <span class="pager-control">‹</span>
+              <span class="pager-control active">1</span>
+              <span class="pager-control">›</span>
+              <span class="pager-control">20 条/页</span>
+            </div>
+            <div class="hint-line">
+              <strong>汇总口径</strong>
+              <span>未选择标的时，同一日期同一时间节点汇总全部标的；选择标的后展示该标的在 00:00、08:00、16:00 三轮的汇总。</span>
+            </div>
+          </section>
+
+          <section id="detailPanel" class="tab-panel" role="tabpanel" aria-labelledby="detailTab">
+            <div class="filters detail-filters" aria-label="明细筛选">
+              <label class="field">
+                <span class="field-label">标的</span>
+                <select id="detailSymbol" class="control">
+                  <option value="">全部标的</option>
+                  <option value="BTC_USDT">BTC_USDT</option>
+                  <option value="ETH_USDT">ETH_USDT</option>
+                  <option value="SOL_USDT">SOL_USDT</option>
+                  <option value="XRP_USDT">XRP_USDT</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">合约账户 ID</span>
+                <input id="detailAccount" class="control" type="text" inputmode="numeric" placeholder="合约账户ID">
+              </label>
+              <label class="field">
+                <span class="field-label">用户 UID</span>
+                <input id="detailUid" class="control" type="text" inputmode="numeric" placeholder="用户ID">
+              </label>
+              <label class="field">
+                <span class="field-label">时间范围</span>
+                <span class="control date-range-control">
+                  <input id="detailStart" type="date" value="2026-05-18" aria-label="开始日期">
+                  <span class="date-arrow">→</span>
+                  <input id="detailEnd" type="date" value="2026-05-20" aria-label="结束日期">
+                </span>
+              </label>
+              <label class="field">
+                <span class="field-label">轮次时间</span>
+                <select id="detailRound" class="control">
+                  <option value="">全部轮次</option>
+                  <option value="00:00">00:00</option>
+                  <option value="08:00">08:00</option>
+                  <option value="16:00">16:00</option>
+                </select>
+              </label>
+              <div class="action-row" aria-label="明细操作">
+                <button id="detailReset" class="button reset" type="button">重置</button>
+                <button id="detailEdit" class="button indicator" type="button">指标编辑</button>
+                <button id="detailSearch" class="button primary" type="button">查询</button>
+                <button id="detailExport" class="button export" type="button">导出</button>
+              </div>
+            </div>
+
+            <div class="summary-strip" aria-label="明细指标">
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="当前明细资金费用绝对值合计，单位 USDT">明细资金费用</div>
+                <div id="detailFeeMetric" class="metric-value charge">0.0000</div>
+                <div class="metric-sub">当前明细资金费用绝对值合计</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="当前明细筛选结果中去重后的用户 UID 数量">覆盖 UID</div>
+                <div id="detailUidMetric" class="metric-value">0</div>
+                <div class="metric-sub">去重用户数量</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="明细筛选范围内，对用户收取的资金费合计，单位 USDT">对用户收取</div>
+                <div id="detailChargeMetric" class="metric-value charge">0.0000</div>
+                <div class="metric-sub">明细筛选内收取合计</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="明细筛选范围内，对用户支出的资金费合计，单位 USDT">对用户支出</div>
+                <div id="detailPayoutMetric" class="metric-value payout">0.0000</div>
+                <div class="metric-sub">明细筛选内支出合计</div>
+              </div>
+            </div>
+
+            <div class="table-toolbar">
+              <div class="table-title">UID 级资金费账单明细</div>
+              <div id="detailMeta" class="table-meta">共 0 条记录</div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="detail-table" aria-label="资金费明细表">
+                <colgroup>
+                  <col style="width: 68px">
+                  <col style="width: 120px">
+                  <col style="width: 130px">
+                  <col style="width: 130px">
+                  <col style="width: 130px">
+                  <col style="width: 120px">
+                  <col style="width: 150px">
+                  <col style="width: 120px">
+                  <col style="width: 140px">
+                  <col style="width: 130px">
+                  <col style="width: 150px">
+                  <col style="width: 150px">
+                  <col style="width: 170px">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>合约名</th>
+                    <th>合约账户ID</th>
+                    <th>用户UID</th>
+                    <th>轮次时间</th>
+                    <th>仓位方向</th>
+                    <th>仓位价值</th>
+                    <th>资金费率</th>
+                    <th>资金费用</th>
+                    <th>账单类型</th>
+                    <th>对用户收取</th>
+                    <th>对用户支出</th>
+                    <th>时间戳</th>
+                  </tr>
+                </thead>
+                <tbody id="detailBody"></tbody>
+              </table>
+              <div id="detailEmpty" class="empty">暂无匹配的 UID 资金费明细</div>
+            </div>
+            <div class="pager">
+              <span id="detailPagerCount">共 0 条</span>
+              <span class="pager-control">‹</span>
+              <span class="pager-control active">1</span>
+              <span class="pager-control">2</span>
+              <span class="pager-control">›</span>
+              <span class="pager-control">20 条/页</span>
+            </div>
+            <div class="hint-line">
+              <strong>明细口径</strong>
+              <span>按标的查看每轮 UID 账单；输入 UID 后可追踪该用户在不同时间点的仓位方向、仓位价值、资金费率和资金费用。</span>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const rounds = [
+      { date: "2026-05-20", time: "00:00", symbol: "BTC_USDT", rate: 0.0445, charge: 642.8881, payout: 596.1184 },
+      { date: "2026-05-19", time: "16:00", symbol: "BTC_USDT", rate: 0.0442, charge: 766.2085, payout: 704.8831 },
+      { date: "2026-05-19", time: "08:00", symbol: "BTC_USDT", rate: 0.0331, charge: 571.7243, payout: 525.3029 },
+      { date: "2026-05-19", time: "00:00", symbol: "BTC_USDT", rate: 0.0567, charge: 1401.7583, payout: 1268.7426 },
+      { date: "2026-05-18", time: "16:00", symbol: "BTC_USDT", rate: 0.0417, charge: 685.9969, payout: 637.4407 },
+      { date: "2026-05-18", time: "08:00", symbol: "BTC_USDT", rate: 0.0464, charge: 1139.1393, payout: 1042.9285 },
+      { date: "2026-05-18", time: "00:00", symbol: "BTC_USDT", rate: 0.0442, charge: 634.5527, payout: 577.2902 },
+      { date: "2026-05-20", time: "00:00", symbol: "ETH_USDT", rate: 0.0318, charge: 389.2204, payout: 342.7789 },
+      { date: "2026-05-19", time: "16:00", symbol: "ETH_USDT", rate: 0.0289, charge: 452.4408, payout: 405.1197 },
+      { date: "2026-05-19", time: "08:00", symbol: "ETH_USDT", rate: 0.0264, charge: 318.6119, payout: 284.2011 },
+      { date: "2026-05-19", time: "00:00", symbol: "ETH_USDT", rate: 0.0391, charge: 577.0342, payout: 515.7742 },
+      { date: "2026-05-18", time: "16:00", symbol: "ETH_USDT", rate: 0.0308, charge: 402.1176, payout: 358.9193 },
+      { date: "2026-05-18", time: "08:00", symbol: "ETH_USDT", rate: 0.0342, charge: 528.7712, payout: 476.8012 },
+      { date: "2026-05-18", time: "00:00", symbol: "ETH_USDT", rate: 0.0296, charge: 366.3321, payout: 321.8808 },
+      { date: "2026-05-20", time: "00:00", symbol: "SOL_USDT", rate: 0.0184, charge: 121.0446, payout: 98.6274 },
+      { date: "2026-05-19", time: "16:00", symbol: "SOL_USDT", rate: 0.0212, charge: 156.1195, payout: 133.8435 },
+      { date: "2026-05-19", time: "08:00", symbol: "SOL_USDT", rate: 0.0176, charge: 110.8048, payout: 91.5055 },
+      { date: "2026-05-19", time: "00:00", symbol: "SOL_USDT", rate: 0.0241, charge: 191.7732, payout: 161.4041 },
+      { date: "2026-05-18", time: "16:00", symbol: "SOL_USDT", rate: 0.0193, charge: 142.4418, payout: 122.5037 },
+      { date: "2026-05-18", time: "08:00", symbol: "SOL_USDT", rate: 0.0225, charge: 164.7723, payout: 139.6642 },
+      { date: "2026-05-18", time: "00:00", symbol: "SOL_USDT", rate: 0.0206, charge: 151.0084, payout: 127.3022 },
+      { date: "2026-05-20", time: "00:00", symbol: "XRP_USDT", rate: 0.0122, charge: 72.6631, payout: 59.5519 },
+      { date: "2026-05-19", time: "16:00", symbol: "XRP_USDT", rate: 0.0148, charge: 95.6404, payout: 79.4473 },
+      { date: "2026-05-19", time: "08:00", symbol: "XRP_USDT", rate: 0.0119, charge: 68.3502, payout: 55.7265 },
+      { date: "2026-05-19", time: "00:00", symbol: "XRP_USDT", rate: 0.0153, charge: 99.7785, payout: 81.1046 },
+      { date: "2026-05-18", time: "16:00", symbol: "XRP_USDT", rate: 0.0129, charge: 80.1917, payout: 66.9524 },
+      { date: "2026-05-18", time: "08:00", symbol: "XRP_USDT", rate: 0.0138, charge: 88.4478, payout: 71.3341 },
+      { date: "2026-05-18", time: "00:00", symbol: "XRP_USDT", rate: 0.0127, charge: 76.4491, payout: 63.3802 }
+    ].map((item) => ({ ...item, maker: round4(item.charge - item.payout) }));
+
+    const detailRows = [
+      detail("BTC_USDT", "11255752", "11255752", "2026-05-20", "00:00", "空", 596.6766, 0.0445, 0.2655, "payout"),
+      detail("BTC_USDT", "11259919", "11259919", "2026-05-20", "00:00", "空", 30598.8, 0.0445, 13.6164, "payout"),
+      detail("BTC_USDT", "11240259", "11240259", "2026-05-20", "00:00", "多", 703.7724, 0.0445, 0.3131, "charge"),
+      detail("BTC_USDT", "11256101", "11256101", "2026-05-20", "00:00", "多", 1713.5328, 0.0445, 0.7625, "charge"),
+      detail("BTC_USDT", "11246951", "11246951", "2026-05-20", "00:00", "空", 589.0269, 0.0445, 0.2621, "payout"),
+      detail("BTC_USDT", "11256257", "11256257", "2026-05-20", "00:00", "多", 19124.25, 0.0445, 8.5102, "charge"),
+      detail("BTC_USDT", "11259749", "11259749", "2026-05-20", "00:00", "空", 152.994, 0.0445, 0.0680, "payout"),
+      detail("BTC_USDT", "11248122", "11248122", "2026-05-20", "00:00", "空", 24976.2705, 0.0445, 11.1144, "payout"),
+      detail("BTC_USDT", "11254731", "11254731", "2026-05-20", "00:00", "多", 9814.5651, 0.0445, 4.3674, "charge"),
+      detail("BTC_USDT", "11257730", "11257730", "2026-05-20", "00:00", "多", 4352.6793, 0.0445, 1.9369, "charge"),
+      detail("BTC_USDT", "MM90001", "90001", "2026-05-20", "00:00", "做市", 102598.5448, 0.0445, 46.7697, "maker"),
+      detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "00:00", "多", 14855.21, 0.0442, 6.5659, "charge"),
+      detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "08:00", "多", 32418.72, 0.0464, 15.0423, "charge"),
+      detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "16:00", "空", 17789.34, 0.0417, 7.4181, "payout"),
+      detail("BTC_USDT", "11247887", "11247887", "2026-05-19", "00:00", "多", 64211.58, 0.0567, 36.4080, "charge"),
+      detail("BTC_USDT", "11247887", "11247887", "2026-05-19", "08:00", "空", 25120.40, 0.0331, 8.3135, "payout"),
+      detail("BTC_USDT", "11247887", "11247887", "2026-05-19", "16:00", "多", 39502.80, 0.0442, 17.4602, "charge"),
+      detail("ETH_USDT", "11247887", "11247887", "2026-05-20", "00:00", "空", 11342.85, 0.0318, 3.6070, "payout"),
+      detail("ETH_USDT", "11271026", "11271026", "2026-05-20", "00:00", "多", 22109.44, 0.0318, 7.0314, "charge"),
+      detail("ETH_USDT", "11270192", "11270192", "2026-05-19", "16:00", "空", 18420.35, 0.0289, 5.3235, "payout"),
+      detail("ETH_USDT", "MM90002", "90002", "2026-05-19", "16:00", "做市", 163741.18, 0.0289, 47.3211, "maker"),
+      detail("SOL_USDT", "11268944", "11268944", "2026-05-19", "08:00", "多", 6049.24, 0.0176, 1.0647, "charge"),
+      detail("SOL_USDT", "11267111", "11267111", "2026-05-19", "00:00", "空", 7820.13, 0.0241, 1.8846, "payout"),
+      detail("XRP_USDT", "11263348", "11263348", "2026-05-18", "16:00", "多", 15922.74, 0.0129, 2.0530, "charge"),
+      detail("XRP_USDT", "MM90003", "90003", "2026-05-18", "08:00", "做市", 124012.32, 0.0138, 17.1137, "maker")
+    ];
+
+    const $ = (id) => document.getElementById(id);
+
+    const summaryState = {
+      symbol: "",
+      date: "2026-05-19",
+      start: "2026-05-18",
+      end: "2026-05-20"
+    };
+
+    const detailState = {
+      symbol: "",
+      account: "",
+      uid: "",
+      start: "2026-05-18",
+      end: "2026-05-20",
+      round: ""
+    };
+
+    function detail(symbol, accountId, uid, date, time, side, positionValue, rate, fee, billType) {
+      const ts = `${date} ${time}:00`;
+      return {
+        symbol,
+        accountId,
+        uid,
+        date,
+        time,
+        side,
+        positionValue,
+        rate,
+        fee,
+        billType,
+        timestamp: ts
+      };
+    }
+
+    function round4(value) {
+      return Math.round((Number(value) + Number.EPSILON) * 10000) / 10000;
+    }
+
+    function formatMoney(value) {
+      return Number(value).toLocaleString("en-US", {
+        minimumFractionDigits: 4,
+        maximumFractionDigits: 4
+      });
+    }
+
+    function formatNumber(value) {
+      return Number(value).toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 4
+      });
+    }
+
+    function moneyCell(value, className = "") {
+      return `<span class="${className}">${formatMoney(value)}</span><span class="unit">USDT</span>`;
+    }
+
+    function inDateRange(date, start, end) {
+      if (start && date < start) return false;
+      if (end && date > end) return false;
+      return true;
+    }
+
+    function groupSummary(rows, symbol) {
+      if (symbol) {
+        return rows.map((row) => ({ ...row, displaySymbol: row.symbol }));
+      }
+
+      const grouped = new Map();
+      rows.forEach((row) => {
+        const key = `${row.date}|${row.time}`;
+        const current = grouped.get(key) || {
+          date: row.date,
+          time: row.time,
+          symbol: "",
+          displaySymbol: "全部标的",
+          rate: 0,
+          charge: 0,
+          payout: 0,
+          maker: 0,
+          count: 0
+        };
+        current.charge += row.charge;
+        current.payout += row.payout;
+        current.maker += row.maker;
+        current.rate += row.rate;
+        current.count += 1;
+        grouped.set(key, current);
+      });
+
+      return Array.from(grouped.values()).map((row) => ({
+        ...row,
+        charge: round4(row.charge),
+        payout: round4(row.payout),
+        maker: round4(row.maker),
+        rate: round4(row.rate / row.count)
+      }));
+    }
+
+    function sortByTimeDesc(a, b) {
+      return `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`);
+    }
+
+    function renderSummary() {
+      const source = rounds.filter((row) => {
+        const symbolMatch = !summaryState.symbol || row.symbol === summaryState.symbol;
+        const dateMatch = summaryState.date ? row.date === summaryState.date : inDateRange(row.date, summaryState.start, summaryState.end);
+        return symbolMatch && dateMatch;
+      });
+      const rows = groupSummary(source, summaryState.symbol).sort(sortByTimeDesc);
+      const total = rows.reduce((acc, row) => {
+        acc.charge += row.charge;
+        acc.payout += row.payout;
+        acc.maker += row.maker;
+        return acc;
+      }, { charge: 0, payout: 0, maker: 0 });
+      total.charge = round4(total.charge);
+      total.payout = round4(total.payout);
+      total.maker = round4(total.maker);
+      const checkDiff = round4(total.charge - total.payout - total.maker);
+
+      $("metricCharge").textContent = formatMoney(total.charge);
+      $("metricPayout").textContent = formatMoney(total.payout);
+      $("metricMaker").textContent = formatMoney(total.maker);
+      $("metricCheck").textContent = Math.abs(checkDiff) < 0.0001 ? "通过" : `差额 ${formatMoney(checkDiff)}`;
+      $("metricCheck").style.color = Math.abs(checkDiff) < 0.0001 ? "var(--green)" : "var(--red)";
+
+      const tbody = $("summaryBody");
+      tbody.innerHTML = rows.map((row, index) => {
+        const ok = Math.abs(round4(row.charge - row.payout - row.maker)) < 0.0001;
+        const detailSymbol = row.symbol || "";
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${row.date}</td>
+            <td>${row.time}</td>
+            <td>${row.displaySymbol}</td>
+            <td>${formatMoney(row.rate)}%</td>
+            <td class="num">${moneyCell(row.charge, "money-charge")}</td>
+            <td class="num">${moneyCell(row.payout, "money-payout")}</td>
+            <td class="num">${moneyCell(row.maker, "money-maker")}</td>
+            <td><span class="tag ok">${ok ? "通过" : "异常"}</span></td>
+            <td><button class="link-button" type="button" data-detail-date="${row.date}" data-detail-time="${row.time}" data-detail-symbol="${detailSymbol}">资金明细</button></td>
+          </tr>
+        `;
+      }).join("");
+
+      $("summaryEmpty").style.display = rows.length ? "none" : "block";
+      $("summaryMeta").textContent = `共 ${rows.length} 条记录`;
+      $("summaryPagerCount").textContent = `共 ${rows.length} 条`;
+      tbody.querySelectorAll("[data-detail-date]").forEach((button) => {
+        button.addEventListener("click", () => {
+          detailState.symbol = button.dataset.detailSymbol || summaryState.symbol || "";
+          detailState.start = button.dataset.detailDate;
+          detailState.end = button.dataset.detailDate;
+          detailState.round = button.dataset.detailTime;
+          detailState.account = "";
+          detailState.uid = "";
+          syncDetailControls();
+          switchTab("detail");
+          renderDetail();
+          showToast("已按当前汇总轮次带入明细筛选");
+        });
+      });
+    }
+
+    function billTypeLabel(type) {
+      if (type === "charge") return "对用户收取";
+      if (type === "payout") return "对用户支出";
+      return "做市收取";
+    }
+
+    function billTypeClass(type) {
+      if (type === "charge") return "charge";
+      if (type === "payout") return "payout";
+      return "maker";
+    }
+
+    function sideClass(side) {
+      if (side === "多") return "long";
+      if (side === "空") return "short";
+      return "maker";
+    }
+
+    function renderDetail() {
+      const rows = detailRows.filter((row) => {
+        if (detailState.symbol && row.symbol !== detailState.symbol) return false;
+        if (detailState.account && !row.accountId.includes(detailState.account)) return false;
+        if (detailState.uid && !row.uid.includes(detailState.uid)) return false;
+        if (detailState.round && row.time !== detailState.round) return false;
+        return inDateRange(row.date, detailState.start, detailState.end);
+      }).sort(sortByTimeDesc);
+
+      const totals = rows.reduce((acc, row) => {
+        acc.fee += Math.abs(row.fee);
+        if (row.billType === "charge") acc.charge += row.fee;
+        if (row.billType === "payout") acc.payout += row.fee;
+        acc.uids.add(row.uid);
+        return acc;
+      }, { fee: 0, charge: 0, payout: 0, uids: new Set() });
+
+      $("detailFeeMetric").textContent = formatMoney(round4(totals.fee));
+      $("detailUidMetric").textContent = totals.uids.size;
+      $("detailChargeMetric").textContent = formatMoney(round4(totals.charge));
+      $("detailPayoutMetric").textContent = formatMoney(round4(totals.payout));
+
+      const tbody = $("detailBody");
+      tbody.innerHTML = rows.map((row, index) => {
+        const chargeValue = row.billType === "charge" ? row.fee : 0;
+        const payoutValue = row.billType === "payout" ? row.fee : 0;
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${row.symbol}</td>
+            <td>${row.accountId}</td>
+            <td>${row.uid}</td>
+            <td>${row.date} ${row.time}</td>
+            <td><span class="tag ${sideClass(row.side)}">${row.side === "做市" ? "做市账户" : row.side + "仓"}</span></td>
+            <td class="num">${formatNumber(row.positionValue)}<span class="unit">USDT</span></td>
+            <td>${formatMoney(row.rate)}%</td>
+            <td class="num">${moneyCell(row.fee, row.billType === "payout" ? "money-payout" : row.billType === "maker" ? "money-maker" : "money-charge")}</td>
+            <td><span class="tag ${billTypeClass(row.billType)}">${billTypeLabel(row.billType)}</span></td>
+            <td class="num">${chargeValue ? moneyCell(chargeValue, "money-charge") : '<span class="muted">-</span>'}</td>
+            <td class="num">${payoutValue ? moneyCell(payoutValue, "money-payout") : '<span class="muted">-</span>'}</td>
+            <td>${row.timestamp}</td>
+          </tr>
+        `;
+      }).join("");
+
+      $("detailEmpty").style.display = rows.length ? "none" : "block";
+      $("detailMeta").textContent = `共 ${rows.length} 条记录`;
+      $("detailPagerCount").textContent = `共 ${rows.length} 条`;
+    }
+
+    function switchTab(tab) {
+      const isSummary = tab === "summary";
+      $("summaryTab").classList.toggle("active", isSummary);
+      $("detailTab").classList.toggle("active", !isSummary);
+      $("summaryPanel").classList.toggle("active", isSummary);
+      $("detailPanel").classList.toggle("active", !isSummary);
+      $("summaryTab").setAttribute("aria-selected", String(isSummary));
+      $("detailTab").setAttribute("aria-selected", String(!isSummary));
+    }
+
+    function syncSummaryState() {
+      summaryState.symbol = $("summarySymbol").value;
+      summaryState.date = $("summaryDate").value;
+      summaryState.start = $("summaryStart").value;
+      summaryState.end = $("summaryEnd").value;
+    }
+
+    function syncDetailState() {
+      detailState.symbol = $("detailSymbol").value;
+      detailState.account = $("detailAccount").value.trim();
+      detailState.uid = $("detailUid").value.trim();
+      detailState.start = $("detailStart").value;
+      detailState.end = $("detailEnd").value;
+      detailState.round = $("detailRound").value;
+    }
+
+    function syncDetailControls() {
+      $("detailSymbol").value = detailState.symbol;
+      $("detailAccount").value = detailState.account;
+      $("detailUid").value = detailState.uid;
+      $("detailStart").value = detailState.start;
+      $("detailEnd").value = detailState.end;
+      $("detailRound").value = detailState.round;
+    }
+
+    function showToast(message) {
+      const toast = $("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2400);
+    }
+
+    function setTheme(theme) {
+      document.body.dataset.theme = theme;
+      $("themeToggle").setAttribute("aria-label", theme === "dark" ? "切换到亮色" : "切换到暗色");
+    }
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll(".language-option").forEach((option) => {
+        const active = option.dataset.lang === lang;
+        option.classList.toggle("active", active);
+        option.setAttribute("aria-checked", String(active));
+      });
+      $("languageSwitch").classList.remove("open");
+      $("languageToggle").setAttribute("aria-expanded", "false");
+      showToast(lang === "zh-CN" ? "已切换为简体中文" : "Language switched to English");
+    }
+
+    $("summaryTab").addEventListener("click", () => switchTab("summary"));
+    $("detailTab").addEventListener("click", () => switchTab("detail"));
+    $("themeToggle").addEventListener("click", () => {
+      const nextTheme = document.body.dataset.theme === "dark" ? "light" : "dark";
+      setTheme(nextTheme);
+      showToast(nextTheme === "dark" ? "已切换为暗色模式" : "已切换为亮色模式");
+    });
+    $("languageToggle").addEventListener("click", (event) => {
+      event.stopPropagation();
+      const switcher = $("languageSwitch");
+      const open = !switcher.classList.contains("open");
+      switcher.classList.toggle("open", open);
+      $("languageToggle").setAttribute("aria-expanded", String(open));
+    });
+    document.querySelectorAll(".language-option").forEach((option) => {
+      option.addEventListener("click", (event) => {
+        event.stopPropagation();
+        setLanguage(option.dataset.lang);
+      });
+    });
+    document.addEventListener("click", () => {
+      $("languageSwitch").classList.remove("open");
+      $("languageToggle").setAttribute("aria-expanded", "false");
+    });
+    $("summarySearch").addEventListener("click", () => {
+      syncSummaryState();
+      renderSummary();
+      showToast("汇总数据已按筛选刷新");
+    });
+    $("summaryEdit").addEventListener("click", () => showToast("指标编辑入口已预留"));
+    $("summaryExport").addEventListener("click", () => showToast("导出入口已预留"));
+    $("summaryReset").addEventListener("click", () => {
+      $("summarySymbol").value = "";
+      $("summaryDate").value = "2026-05-19";
+      $("summaryStart").value = "2026-05-18";
+      $("summaryEnd").value = "2026-05-20";
+      syncSummaryState();
+      renderSummary();
+      showToast("汇总筛选已重置");
+    });
+    $("detailSearch").addEventListener("click", () => {
+      syncDetailState();
+      renderDetail();
+      showToast("明细数据已按筛选刷新");
+    });
+    $("detailEdit").addEventListener("click", () => showToast("指标编辑入口已预留"));
+    $("detailExport").addEventListener("click", () => showToast("导出入口已预留"));
+    $("detailReset").addEventListener("click", () => {
+      $("detailSymbol").value = "";
+      $("detailAccount").value = "";
+      $("detailUid").value = "";
+      $("detailStart").value = "2026-05-18";
+      $("detailEnd").value = "2026-05-20";
+      $("detailRound").value = "";
+      syncDetailState();
+      renderDetail();
+      showToast("明细筛选已重置");
+    });
+    $("summaryDate").addEventListener("change", () => {
+      if ($("summaryDate").value) {
+        $("summaryStart").value = "";
+        $("summaryEnd").value = "";
+      }
+    });
+    $("summaryStart").addEventListener("change", () => {
+      $("summaryDate").value = "";
+    });
+    $("summaryEnd").addEventListener("change", () => {
+      $("summaryDate").value = "";
+    });
+
+    setTheme("dark");
+    renderSummary();
+    renderDetail();
+  </script>
+</body>
+</html>
