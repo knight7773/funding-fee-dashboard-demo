@@ -941,11 +941,14 @@
       padding: 0;
       font-size: 14px;
       font-weight: 820;
+      text-decoration: none;
+      text-underline-offset: 3px;
     }
 
     .link-button:hover {
       color: var(--primary-dark);
-      text-decoration: underline;
+      text-decoration-line: underline;
+      text-decoration-thickness: 2px;
     }
 
     .empty {
@@ -1301,11 +1304,6 @@
 
             <div class="summary-strip" aria-label="明细指标">
               <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="当前明细资金费用绝对值合计，单位 USDT">明细资金费用</div>
-                <div id="detailFeeMetric" class="metric-value charge">0.0000</div>
-                <div class="metric-sub">当前明细资金费用绝对值合计</div>
-              </div>
-              <div class="metric">
                 <div class="metric-label" tabindex="0" data-tooltip="当前明细筛选结果中去重后的用户 UID 数量">覆盖 UID</div>
                 <div id="detailUidMetric" class="metric-value">0</div>
                 <div class="metric-sub">去重用户数量</div>
@@ -1593,7 +1591,6 @@
 
       if (!detailState.locked) {
         tbody.innerHTML = "";
-        $("detailFeeMetric").textContent = "0.0000";
         $("detailUidMetric").textContent = "0";
         $("detailChargeMetric").textContent = "0.0000";
         $("detailPayoutMetric").textContent = "0.0000";
@@ -1613,14 +1610,12 @@
       }).sort(sortDetailRows);
 
       const totals = rows.reduce((acc, row) => {
-        acc.fee += Math.abs(row.fee);
         if (row.billType === "charge") acc.charge += row.fee;
         if (row.billType === "payout") acc.payout += row.fee;
         acc.uids.add(row.uid);
         return acc;
-      }, { fee: 0, charge: 0, payout: 0, uids: new Set() });
+      }, { charge: 0, payout: 0, uids: new Set() });
 
-      $("detailFeeMetric").textContent = formatMoney(round4(totals.fee));
       $("detailUidMetric").textContent = totals.uids.size;
       $("detailChargeMetric").textContent = formatMoney(round4(totals.charge));
       $("detailPayoutMetric").textContent = formatMoney(-round4(totals.payout));
