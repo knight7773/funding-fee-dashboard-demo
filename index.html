@@ -54,12 +54,12 @@
       --tag-long-text: var(--up);
       --tag-long-bg: rgba(32, 199, 176, 0.12);
       --tag-long-border: rgba(32, 199, 176, 0.42);
-      --tag-charge-text: var(--down);
-      --tag-charge-bg: rgba(139, 97, 223, 0.14);
-      --tag-charge-border: rgba(139, 97, 223, 0.46);
-      --tag-payout-text: var(--up);
-      --tag-payout-bg: rgba(32, 199, 176, 0.12);
-      --tag-payout-border: rgba(32, 199, 176, 0.42);
+      --tag-charge-text: var(--up);
+      --tag-charge-bg: rgba(32, 199, 176, 0.12);
+      --tag-charge-border: rgba(32, 199, 176, 0.42);
+      --tag-payout-text: var(--down);
+      --tag-payout-bg: rgba(139, 97, 223, 0.14);
+      --tag-payout-border: rgba(139, 97, 223, 0.46);
       --tag-maker-text: var(--up);
       --tag-maker-bg: rgba(32, 199, 176, 0.12);
       --tag-maker-border: rgba(32, 199, 176, 0.42);
@@ -113,12 +113,12 @@
       --tag-long-text: var(--up);
       --tag-long-bg: rgba(11, 159, 136, 0.1);
       --tag-long-border: rgba(11, 159, 136, 0.28);
-      --tag-charge-text: var(--down);
-      --tag-charge-bg: rgba(123, 85, 216, 0.1);
-      --tag-charge-border: rgba(123, 85, 216, 0.3);
-      --tag-payout-text: var(--up);
-      --tag-payout-bg: rgba(11, 159, 136, 0.1);
-      --tag-payout-border: rgba(11, 159, 136, 0.28);
+      --tag-charge-text: var(--up);
+      --tag-charge-bg: rgba(11, 159, 136, 0.1);
+      --tag-charge-border: rgba(11, 159, 136, 0.28);
+      --tag-payout-text: var(--down);
+      --tag-payout-bg: rgba(123, 85, 216, 0.1);
+      --tag-payout-border: rgba(123, 85, 216, 0.3);
       --tag-maker-text: var(--up);
       --tag-maker-bg: rgba(11, 159, 136, 0.1);
       --tag-maker-border: rgba(11, 159, 136, 0.28);
@@ -510,7 +510,7 @@
     }
 
     .detail-filters {
-      grid-template-columns: 125px 145px 110px 135px 135px repeat(4, 82px);
+      grid-template-columns: 125px 145px 110px 135px minmax(0, 1fr) repeat(4, 82px);
       gap: 10px;
     }
 
@@ -739,11 +739,11 @@
     }
 
     .metric-value.charge {
-      color: var(--down);
+      color: var(--up);
     }
 
     .metric-value.payout {
-      color: var(--up);
+      color: var(--down);
     }
 
     .metric-value.maker {
@@ -803,7 +803,7 @@
     }
 
     .detail-table {
-      min-width: 1650px;
+      min-width: 1520px;
     }
 
     thead {
@@ -859,11 +859,11 @@
     }
 
     .money-charge {
-      color: var(--down);
+      color: var(--up);
     }
 
     .money-payout {
-      color: var(--up);
+      color: var(--down);
     }
 
     .money-maker {
@@ -1198,14 +1198,14 @@
 
             <div class="summary-strip" aria-label="汇总指标">
               <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="按当前筛选汇总，单位 USDT">对用户收取</div>
+                <div class="metric-label" tabindex="0" data-tooltip="交易所向用户收取的资金费合计">对用户收取</div>
                 <div id="metricCharge" class="metric-value charge">0.0000</div>
-                <div class="metric-sub">按当前筛选汇总，单位 USDT</div>
+                <div class="metric-sub">交易所向用户收取的资金费合计</div>
               </div>
               <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="用户收到的资金费合计，单位 USDT">对用户支出</div>
+                <div class="metric-label" tabindex="0" data-tooltip="交易所向用户支付的资金费合计">对用户支出</div>
                 <div id="metricPayout" class="metric-value payout">0.0000</div>
-                <div class="metric-sub">用户收到的资金费合计</div>
+                <div class="metric-sub">交易所向用户支付的资金费合计</div>
               </div>
               <div class="metric">
                 <div class="metric-label" tabindex="0" data-tooltip="对用户收取与对用户支出的差额归集，单位 USDT">做市收取</div>
@@ -1288,10 +1288,6 @@
                 </select>
               </label>
               <label class="field">
-                <span class="field-label">合约账户 ID</span>
-                <input id="detailAccount" class="control" type="text" inputmode="numeric" placeholder="合约账户ID">
-              </label>
-              <label class="field">
                 <span class="field-label">用户 UID</span>
                 <input id="detailUid" class="control" type="text" inputmode="numeric" placeholder="用户ID">
               </label>
@@ -1315,14 +1311,14 @@
                 <div class="metric-sub">去重用户数量</div>
               </div>
               <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="明细筛选范围内，对用户收取的资金费合计，单位 USDT">对用户收取</div>
+                <div class="metric-label" tabindex="0" data-tooltip="交易所向用户收取的资金费合计">对用户收取</div>
                 <div id="detailChargeMetric" class="metric-value charge">0.0000</div>
-                <div class="metric-sub">明细筛选内收取合计</div>
+                <div class="metric-sub">交易所向用户收取的资金费合计</div>
               </div>
               <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="明细筛选范围内，对用户支出的资金费合计，单位 USDT">对用户支出</div>
+                <div class="metric-label" tabindex="0" data-tooltip="交易所向用户支付的资金费合计">对用户支出</div>
                 <div id="detailPayoutMetric" class="metric-value payout">0.0000</div>
-                <div class="metric-sub">明细筛选内支出合计</div>
+                <div class="metric-sub">交易所向用户支付的资金费合计</div>
               </div>
             </div>
 
@@ -1338,7 +1334,6 @@
                   <col style="width: 170px">
                   <col style="width: 120px">
                   <col style="width: 130px">
-                  <col style="width: 130px">
                   <col style="width: 116px">
                   <col style="width: 104px">
                   <col style="width: 112px">
@@ -1353,7 +1348,6 @@
                     <th>序号</th>
                     <th>资金费用记录ID</th>
                     <th>合约名</th>
-                    <th>合约账户ID</th>
                     <th>用户UID</th>
                     <th>日期</th>
                     <th>轮次时间</th>
@@ -1433,14 +1427,12 @@
       symbol: "",
       date: "",
       round: "",
-      account: "",
       uid: "",
       locked: false
     };
 
     function buildRoundDetails(row, roundIndex) {
       const symbolOffset = symbolOrder.indexOf(row.symbol) + 1;
-      const baseAccount = 11230000 + symbolOffset * 1000 + roundIndex * 10;
       const baseUid = 81200000 + symbolOffset * 1000 + roundIndex * 10;
       const chargeMain = round4(row.charge * 0.58);
       const chargeRest = round4(row.charge - chargeMain);
@@ -1449,11 +1441,11 @@
       const makerFee = round4(row.maker);
 
       return [
-        detail(makeRecordId(row, 1), row.symbol, String(baseAccount + 1), String(baseUid + 1), row.date, row.time, "多", positionValueFromFee(chargeMain, row.rate), row.rate, chargeMain, "charge"),
-        detail(makeRecordId(row, 2), row.symbol, String(baseAccount + 2), String(baseUid + 2), row.date, row.time, "多", positionValueFromFee(chargeRest, row.rate), row.rate, chargeRest, "charge"),
-        detail(makeRecordId(row, 3), row.symbol, String(baseAccount + 3), String(baseUid + 3), row.date, row.time, "空", positionValueFromFee(payoutMain, row.rate), row.rate, payoutMain, "payout"),
-        detail(makeRecordId(row, 4), row.symbol, String(baseAccount + 4), String(baseUid + 4), row.date, row.time, "空", positionValueFromFee(payoutRest, row.rate), row.rate, payoutRest, "payout"),
-        detail(makeRecordId(row, 5), row.symbol, `MM${90000 + symbolOffset}`, String(90000 + symbolOffset), row.date, row.time, "多", positionValueFromFee(makerFee, row.rate), row.rate, makerFee, "maker")
+        detail(makeRecordId(row, 1), row.symbol, String(baseUid + 1), row.date, row.time, "多", positionValueFromFee(chargeMain, row.rate), row.rate, chargeMain, "charge"),
+        detail(makeRecordId(row, 2), row.symbol, String(baseUid + 2), row.date, row.time, "多", positionValueFromFee(chargeRest, row.rate), row.rate, chargeRest, "charge"),
+        detail(makeRecordId(row, 3), row.symbol, String(baseUid + 3), row.date, row.time, "空", positionValueFromFee(payoutMain, row.rate), row.rate, payoutMain, "payout"),
+        detail(makeRecordId(row, 4), row.symbol, String(baseUid + 4), row.date, row.time, "空", positionValueFromFee(payoutRest, row.rate), row.rate, payoutRest, "payout"),
+        detail(makeRecordId(row, 5), row.symbol, String(90000 + symbolOffset), row.date, row.time, "多", positionValueFromFee(makerFee, row.rate), row.rate, makerFee, "maker")
       ];
     }
 
@@ -1468,11 +1460,10 @@
       return round4((fee * 100) / rate);
     }
 
-    function detail(recordId, symbol, accountId, uid, date, time, side, positionValue, rate, fee, billType) {
+    function detail(recordId, symbol, uid, date, time, side, positionValue, rate, fee, billType) {
       return {
         recordId,
         symbol,
-        accountId,
         uid,
         date,
         time,
@@ -1569,7 +1560,6 @@
           detailState.symbol = button.dataset.detailSymbol;
           detailState.date = button.dataset.detailDate;
           detailState.round = button.dataset.detailTime;
-          detailState.account = "";
           detailState.uid = "";
           detailState.locked = true;
           syncDetailControls();
@@ -1618,7 +1608,6 @@
         if (detailState.symbol && row.symbol !== detailState.symbol) return false;
         if (row.date !== detailState.date) return false;
         if (row.time !== detailState.round) return false;
-        if (detailState.account && !row.accountId.includes(detailState.account)) return false;
         if (detailState.uid && !row.uid.includes(detailState.uid)) return false;
         return true;
       }).sort(sortDetailRows);
@@ -1642,7 +1631,6 @@
             <td>${index + 1}</td>
             <td>${row.recordId}</td>
             <td>${row.symbol}</td>
-            <td>${row.accountId}</td>
             <td>${row.uid}</td>
             <td>${row.date}</td>
             <td>${row.time}</td>
@@ -1681,7 +1669,6 @@
       detailState.symbol = $("detailSymbol").value;
       detailState.date = $("detailDate").value;
       detailState.round = $("detailRound").value;
-      detailState.account = $("detailAccount").value.trim();
       detailState.uid = $("detailUid").value.trim();
     }
 
@@ -1689,7 +1676,6 @@
       $("detailSymbol").value = detailState.symbol;
       $("detailDate").value = detailState.date;
       $("detailRound").value = detailState.round;
-      $("detailAccount").value = detailState.account;
       $("detailUid").value = detailState.uid;
     }
 
@@ -1768,11 +1754,10 @@
     $("detailEdit").addEventListener("click", () => showToast("指标编辑入口已预留"));
     $("detailExport").addEventListener("click", () => showToast("导出入口已预留"));
     $("detailReset").addEventListener("click", () => {
-      $("detailAccount").value = "";
       $("detailUid").value = "";
       syncDetailState();
       renderDetail();
-      showToast("明细账户与 UID 筛选已重置");
+      showToast("明细 UID 筛选已重置");
     });
 
     setTheme("dark");
