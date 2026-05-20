@@ -40,7 +40,7 @@
       --button-reset-bg: #202020;
       --button-reset-border: #393a42;
       --button-edit-bg: var(--down);
-      --button-export-bg: var(--up);
+      --button-export-bg: #2f7cff;
       --rule-bg: rgba(32, 199, 176, 0.12);
       --rule-border: rgba(32, 199, 176, 0.42);
       --rule-text: var(--up);
@@ -99,7 +99,7 @@
       --button-reset-bg: #202020;
       --button-reset-border: #393a42;
       --button-edit-bg: var(--down);
-      --button-export-bg: var(--up);
+      --button-export-bg: #2563eb;
       --rule-bg: rgba(11, 159, 136, 0.1);
       --rule-border: rgba(11, 159, 136, 0.28);
       --rule-text: var(--up);
@@ -505,7 +505,7 @@
     }
 
     .summary-filters {
-      grid-template-columns: 160px 130px minmax(160px, 1fr) repeat(4, 90px);
+      grid-template-columns: 160px 150px minmax(160px, 1fr) repeat(4, 90px);
       gap: 12px;
     }
 
@@ -599,7 +599,18 @@
     }
 
     .action-row {
-      display: contents;
+      display: grid;
+      grid-column: 4 / -1;
+      grid-template-columns: repeat(4, 90px);
+      gap: 12px;
+      align-items: end;
+      justify-content: end;
+    }
+
+    .detail-filters .action-row {
+      grid-column: 6 / -1;
+      grid-template-columns: repeat(4, 82px);
+      gap: 10px;
     }
 
     .action-row .button {
@@ -973,9 +984,9 @@
     }
 
     .pager-control.active {
-      color: #ffffff;
-      border-color: var(--primary);
-      background: var(--primary);
+      color: var(--text-strong);
+      border-color: var(--line-strong);
+      background: var(--control-bg);
     }
 
     .hint-line {
@@ -1174,13 +1185,8 @@
                 </select>
               </label>
               <label class="field">
-                <span class="field-label">轮次时间</span>
-                <select id="summaryRound" class="control">
-                  <option value="">全部轮次</option>
-                  <option value="00:00">00:00</option>
-                  <option value="08:00">08:00</option>
-                  <option value="16:00">16:00</option>
-                </select>
+                <span class="field-label">日期</span>
+                <input id="summaryDate" class="control" type="date" value="2026-05-19">
               </label>
               <div class="action-row" aria-label="汇总操作">
                 <button id="summaryReset" class="button reset" type="button">重置</button>
@@ -1252,7 +1258,7 @@
             </div>
             <div class="hint-line">
               <strong>汇总口径</strong>
-              <span>未选择标的时展示 BTC_USDT、ETH_USDT、SOL_USDT、XRP_USDT 各自的 00:00、08:00、16:00 三轮记录；未到达的轮次不展示。</span>
+              <span>按日期查看各标的 00:00、08:00、16:00 三轮记录；未到达的轮次不展示。</span>
             </div>
           </section>
 
@@ -1260,7 +1266,7 @@
             <div class="filters detail-filters" aria-label="明细筛选">
               <label class="field">
                 <span class="field-label">标的</span>
-                <select id="detailSymbol" class="control" disabled>
+                <select id="detailSymbol" class="control">
                   <option value="">全部标的</option>
                   <option value="BTC_USDT">BTC_USDT</option>
                   <option value="ETH_USDT">ETH_USDT</option>
@@ -1270,11 +1276,11 @@
               </label>
               <label class="field">
                 <span class="field-label">日期</span>
-                <input id="detailDate" class="control" type="date" disabled>
+                <input id="detailDate" class="control" type="date">
               </label>
               <label class="field">
                 <span class="field-label">轮次时间</span>
-                <select id="detailRound" class="control" disabled>
+                <select id="detailRound" class="control">
                   <option value="">请选择轮次</option>
                   <option value="00:00">00:00</option>
                   <option value="08:00">08:00</option>
@@ -1388,15 +1394,27 @@
     const roundOrder = ["00:00", "08:00", "16:00"];
 
     const rounds = [
+      { date: "2026-05-18", time: "00:00", symbol: "BTC_USDT", rate: 0.0442, charge: 634.5527, payout: 577.2902 },
+      { date: "2026-05-18", time: "08:00", symbol: "BTC_USDT", rate: 0.0464, charge: 1139.1393, payout: 1042.9285 },
+      { date: "2026-05-18", time: "16:00", symbol: "BTC_USDT", rate: 0.0417, charge: 685.9969, payout: 637.4407 },
       { date: "2026-05-19", time: "00:00", symbol: "BTC_USDT", rate: 0.0567, charge: 1401.7583, payout: 1268.7426 },
       { date: "2026-05-19", time: "08:00", symbol: "BTC_USDT", rate: 0.0331, charge: 571.7243, payout: 525.3029 },
       { date: "2026-05-19", time: "16:00", symbol: "BTC_USDT", rate: 0.0442, charge: 766.2085, payout: 704.8831 },
+      { date: "2026-05-18", time: "00:00", symbol: "ETH_USDT", rate: 0.0296, charge: 366.3321, payout: 321.8808 },
+      { date: "2026-05-18", time: "08:00", symbol: "ETH_USDT", rate: 0.0342, charge: 528.7712, payout: 476.8012 },
+      { date: "2026-05-18", time: "16:00", symbol: "ETH_USDT", rate: 0.0308, charge: 402.1176, payout: 358.9193 },
       { date: "2026-05-19", time: "00:00", symbol: "ETH_USDT", rate: 0.0391, charge: 577.0342, payout: 515.7742 },
       { date: "2026-05-19", time: "08:00", symbol: "ETH_USDT", rate: 0.0264, charge: 318.6119, payout: 284.2011 },
       { date: "2026-05-19", time: "16:00", symbol: "ETH_USDT", rate: 0.0289, charge: 452.4408, payout: 405.1197 },
+      { date: "2026-05-18", time: "00:00", symbol: "SOL_USDT", rate: 0.0206, charge: 151.0084, payout: 127.3022 },
+      { date: "2026-05-18", time: "08:00", symbol: "SOL_USDT", rate: 0.0225, charge: 164.7723, payout: 139.6642 },
+      { date: "2026-05-18", time: "16:00", symbol: "SOL_USDT", rate: 0.0193, charge: 142.4418, payout: 122.5037 },
       { date: "2026-05-19", time: "00:00", symbol: "SOL_USDT", rate: 0.0241, charge: 191.7732, payout: 161.4041 },
       { date: "2026-05-19", time: "08:00", symbol: "SOL_USDT", rate: 0.0176, charge: 110.8048, payout: 91.5055 },
       { date: "2026-05-19", time: "16:00", symbol: "SOL_USDT", rate: 0.0212, charge: 156.1195, payout: 133.8435 },
+      { date: "2026-05-18", time: "00:00", symbol: "XRP_USDT", rate: 0.0127, charge: 76.4491, payout: 63.3802 },
+      { date: "2026-05-18", time: "08:00", symbol: "XRP_USDT", rate: 0.0138, charge: 88.4478, payout: 71.3341 },
+      { date: "2026-05-18", time: "16:00", symbol: "XRP_USDT", rate: 0.0129, charge: 80.1917, payout: 66.9524 },
       { date: "2026-05-19", time: "00:00", symbol: "XRP_USDT", rate: 0.0153, charge: 99.7785, payout: 81.1046 },
       { date: "2026-05-19", time: "08:00", symbol: "XRP_USDT", rate: 0.0119, charge: 68.3502, payout: 55.7265 },
       { date: "2026-05-19", time: "16:00", symbol: "XRP_USDT", rate: 0.0148, charge: 95.6404, payout: 79.4473 }
@@ -1408,7 +1426,7 @@
 
     const summaryState = {
       symbol: "",
-      round: ""
+      date: "2026-05-19"
     };
 
     const detailState = {
@@ -1509,7 +1527,7 @@
     function renderSummary() {
       const rows = rounds.filter((row) => {
         if (summaryState.symbol && row.symbol !== summaryState.symbol) return false;
-        if (summaryState.round && row.time !== summaryState.round) return false;
+        if (summaryState.date && row.date !== summaryState.date) return false;
         return true;
       }).sort(sortSummaryRows);
       const total = rows.reduce((acc, row) => {
@@ -1597,7 +1615,7 @@
       }
 
       const rows = detailRows.filter((row) => {
-        if (row.symbol !== detailState.symbol) return false;
+        if (detailState.symbol && row.symbol !== detailState.symbol) return false;
         if (row.date !== detailState.date) return false;
         if (row.time !== detailState.round) return false;
         if (detailState.account && !row.accountId.includes(detailState.account)) return false;
@@ -1656,7 +1674,7 @@
 
     function syncSummaryState() {
       summaryState.symbol = $("summarySymbol").value;
-      summaryState.round = $("summaryRound").value;
+      summaryState.date = $("summaryDate").value;
     }
 
     function syncDetailState() {
@@ -1737,7 +1755,7 @@
     $("summaryExport").addEventListener("click", () => showToast("导出入口已预留"));
     $("summaryReset").addEventListener("click", () => {
       $("summarySymbol").value = "";
-      $("summaryRound").value = "";
+      $("summaryDate").value = "2026-05-19";
       syncSummaryState();
       renderSummary();
       showToast("汇总筛选已重置");
