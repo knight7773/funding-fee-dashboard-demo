@@ -19,14 +19,18 @@
       --text: #d7dae2;
       --text-strong: #f5f6fa;
       --muted: #8d929f;
-      --primary: #4d63df;
-      --primary-dark: #4054c2;
-      --cyan: #17a7d8;
-      --teal: #18aa9a;
-      --green: #20a66b;
-      --amber: #d39a0a;
-      --red: #c64553;
-      --violet: #8b61df;
+      --up: #20c7b0;
+      --up-dark: #18aa98;
+      --down: #8b61df;
+      --down-dark: #7850cd;
+      --primary: var(--up);
+      --primary-dark: var(--up-dark);
+      --cyan: var(--up);
+      --teal: var(--up);
+      --green: var(--up);
+      --amber: var(--muted);
+      --red: var(--down);
+      --violet: var(--down);
       --control-bg: #000000;
       --control-text: #f1f2f5;
       --metric-bg: #050505;
@@ -35,30 +39,30 @@
       --row-hover: #0b1018;
       --button-reset-bg: #202020;
       --button-reset-border: #393a42;
-      --button-edit-bg: #8a60dc;
-      --button-export-bg: #18b3a3;
-      --rule-bg: #062823;
-      --rule-border: #16594f;
-      --rule-text: #44d7c5;
-      --ok-text: #58e0b3;
-      --ok-bg: #08251f;
-      --ok-border: #1d8e6c;
-      --ok-shadow: inset 0 0 0 1px rgba(95, 231, 181, 0.1);
-      --tag-short-text: #58e0b3;
-      --tag-short-bg: #08251f;
-      --tag-short-border: #1d8e6c;
-      --tag-long-text: #ff7f92;
-      --tag-long-bg: #2b0c13;
-      --tag-long-border: #b44a5a;
-      --tag-charge-text: #6fb8ff;
-      --tag-charge-bg: #071b31;
-      --tag-charge-border: #2b73b9;
-      --tag-payout-text: #58d8c9;
-      --tag-payout-bg: #062320;
-      --tag-payout-border: #1d8e83;
-      --tag-maker-text: #b89cff;
-      --tag-maker-bg: #1a1130;
-      --tag-maker-border: #6e55c5;
+      --button-edit-bg: var(--down);
+      --button-export-bg: var(--up);
+      --rule-bg: rgba(32, 199, 176, 0.12);
+      --rule-border: rgba(32, 199, 176, 0.42);
+      --rule-text: var(--up);
+      --ok-text: var(--up);
+      --ok-bg: rgba(32, 199, 176, 0.12);
+      --ok-border: rgba(32, 199, 176, 0.42);
+      --ok-shadow: inset 0 0 0 1px rgba(32, 199, 176, 0.08);
+      --tag-short-text: var(--down);
+      --tag-short-bg: rgba(139, 97, 223, 0.14);
+      --tag-short-border: rgba(139, 97, 223, 0.46);
+      --tag-long-text: var(--up);
+      --tag-long-bg: rgba(32, 199, 176, 0.12);
+      --tag-long-border: rgba(32, 199, 176, 0.42);
+      --tag-charge-text: var(--down);
+      --tag-charge-bg: rgba(139, 97, 223, 0.14);
+      --tag-charge-border: rgba(139, 97, 223, 0.46);
+      --tag-payout-text: var(--up);
+      --tag-payout-bg: rgba(32, 199, 176, 0.12);
+      --tag-payout-border: rgba(32, 199, 176, 0.42);
+      --tag-maker-text: var(--up);
+      --tag-maker-bg: rgba(32, 199, 176, 0.12);
+      --tag-maker-border: rgba(32, 199, 176, 0.42);
       --tag-mode-text: #d7dae2;
       --tag-mode-bg: #15161a;
       --tag-mode-border: #373941;
@@ -79,41 +83,45 @@
       --text: #1f2633;
       --text-strong: #10151f;
       --muted: #8a93a5;
-      --primary: #0879d8;
-      --primary-dark: #0667b8;
-      --violet: #695ee8;
+      --up: #0b9f88;
+      --up-dark: #087f6d;
+      --down: #7b55d8;
+      --down-dark: #6540c6;
+      --primary: var(--up);
+      --primary-dark: var(--up-dark);
+      --violet: var(--down);
       --control-bg: #ffffff;
       --control-text: #1f2633;
       --metric-bg: #ffffff;
       --table-bg: #ffffff;
       --row-even: #fcfdff;
-      --row-hover: #f1f8ff;
+      --row-hover: #f6f8fb;
       --button-reset-bg: #202020;
       --button-reset-border: #393a42;
-      --button-edit-bg: #8a60dc;
-      --button-export-bg: #18b3a3;
-      --rule-bg: #edf9f7;
-      --rule-border: #bfded9;
-      --rule-text: #0b7469;
-      --ok-text: #078660;
-      --ok-bg: #eafff4;
-      --ok-border: #aeeccb;
+      --button-edit-bg: var(--down);
+      --button-export-bg: var(--up);
+      --rule-bg: rgba(11, 159, 136, 0.1);
+      --rule-border: rgba(11, 159, 136, 0.28);
+      --rule-text: var(--up);
+      --ok-text: var(--up);
+      --ok-bg: rgba(11, 159, 136, 0.1);
+      --ok-border: rgba(11, 159, 136, 0.28);
       --ok-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
-      --tag-short-text: #13795b;
-      --tag-short-bg: #eef9f4;
-      --tag-short-border: #c5ead8;
-      --tag-long-text: #bf2e3f;
-      --tag-long-bg: #fff0f2;
-      --tag-long-border: #f2c2ca;
-      --tag-charge-text: #075fa8;
-      --tag-charge-bg: #eaf5ff;
-      --tag-charge-border: #bfdcf4;
-      --tag-payout-text: #0b7469;
-      --tag-payout-bg: #e9f8f6;
-      --tag-payout-border: #bee4df;
-      --tag-maker-text: #594ad6;
-      --tag-maker-bg: #f0eeff;
-      --tag-maker-border: #d3cff9;
+      --tag-short-text: var(--down);
+      --tag-short-bg: rgba(123, 85, 216, 0.1);
+      --tag-short-border: rgba(123, 85, 216, 0.3);
+      --tag-long-text: var(--up);
+      --tag-long-bg: rgba(11, 159, 136, 0.1);
+      --tag-long-border: rgba(11, 159, 136, 0.28);
+      --tag-charge-text: var(--down);
+      --tag-charge-bg: rgba(123, 85, 216, 0.1);
+      --tag-charge-border: rgba(123, 85, 216, 0.3);
+      --tag-payout-text: var(--up);
+      --tag-payout-bg: rgba(11, 159, 136, 0.1);
+      --tag-payout-border: rgba(11, 159, 136, 0.28);
+      --tag-maker-text: var(--up);
+      --tag-maker-bg: rgba(11, 159, 136, 0.1);
+      --tag-maker-border: rgba(11, 159, 136, 0.28);
       --tag-mode-text: #344054;
       --tag-mode-bg: #f7f9fc;
       --tag-mode-border: #d8dde7;
@@ -284,8 +292,8 @@
       border: 2px solid #2c2d34;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 70% 30%, #29d2a0 0 13%, transparent 14%),
-        linear-gradient(135deg, #ffe3a6, #9a79ff 52%, #20c4ff);
+        radial-gradient(circle at 70% 30%, var(--up) 0 13%, transparent 14%),
+        linear-gradient(135deg, var(--down), var(--up));
       color: #101116;
       font-size: 13px;
       font-weight: 950;
@@ -321,9 +329,9 @@
       place-items: center;
       width: 32px;
       height: 32px;
-      border: 1px solid #304cff;
+      border: 1px solid var(--up);
       color: #ffffff;
-      background: #101b49;
+      background: rgba(32, 199, 176, 0.16);
       font-size: 15px;
       font-weight: 900;
       margin-right: 10px;
@@ -382,9 +390,9 @@
     }
 
     .submenu-item.active {
-      color: #5f7cff;
+      color: var(--up);
       background: var(--sidebar-active);
-      box-shadow: inset 3px 0 0 #5f7cff;
+      box-shadow: inset 3px 0 0 var(--up);
     }
 
     .content {
@@ -497,12 +505,12 @@
     }
 
     .summary-filters {
-      grid-template-columns: 160px 150px minmax(290px, 1fr) repeat(4, 90px);
+      grid-template-columns: 160px 130px minmax(160px, 1fr) repeat(4, 90px);
       gap: 12px;
     }
 
     .detail-filters {
-      grid-template-columns: 125px 135px 135px 210px 110px repeat(4, 82px);
+      grid-template-columns: 125px 145px 110px 135px 135px repeat(4, 82px);
       gap: 10px;
     }
 
@@ -546,8 +554,16 @@
     }
 
     .control:focus {
-      border-color: #7bb8ee;
-      box-shadow: 0 0 0 3px rgba(8, 121, 216, 0.12);
+      border-color: var(--up);
+      box-shadow: 0 0 0 3px rgba(32, 199, 176, 0.12);
+    }
+
+    .control:disabled,
+    .control[readonly] {
+      color: var(--text-strong);
+      border-color: var(--line);
+      background: var(--surface-soft);
+      opacity: 1;
     }
 
     .date-range-control {
@@ -637,6 +653,10 @@
       border-bottom: 1px solid var(--line);
     }
 
+    #summaryPanel .summary-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .metric {
       position: relative;
       min-width: 0;
@@ -708,15 +728,15 @@
     }
 
     .metric-value.charge {
-      color: var(--primary);
+      color: var(--down);
     }
 
     .metric-value.payout {
-      color: var(--teal);
+      color: var(--up);
     }
 
     .metric-value.maker {
-      color: var(--violet);
+      color: var(--up);
     }
 
     .metric-sub {
@@ -768,11 +788,11 @@
     }
 
     .summary-table {
-      min-width: 1120px;
+      min-width: 1020px;
     }
 
     .detail-table {
-      min-width: 1520px;
+      min-width: 1650px;
     }
 
     thead {
@@ -822,21 +842,21 @@
 
     .unit {
       margin-left: 2px;
-      color: var(--amber);
+      color: var(--muted);
       font-size: 12px;
       font-weight: 850;
     }
 
     .money-charge {
-      color: var(--primary);
+      color: var(--down);
     }
 
     .money-payout {
-      color: var(--teal);
+      color: var(--up);
     }
 
     .money-maker {
-      color: var(--violet);
+      color: var(--up);
     }
 
     .tag {
@@ -980,9 +1000,9 @@
       bottom: 24px;
       display: none;
       max-width: 360px;
-      border: 1px solid #bfe8d4;
-      background: #edf9f3;
-      color: #116546;
+      border: 1px solid var(--tag-payout-border);
+      background: var(--tag-payout-bg);
+      color: var(--up);
       padding: 12px 14px;
       border-radius: 6px;
       box-shadow: var(--shadow);
@@ -1154,16 +1174,13 @@
                 </select>
               </label>
               <label class="field">
-                <span class="field-label">日期</span>
-                <input id="summaryDate" class="control" type="date" value="2026-05-19">
-              </label>
-              <label class="field">
-                <span class="field-label">时间范围</span>
-                <span class="control date-range-control">
-                  <input id="summaryStart" type="date" value="2026-05-18" aria-label="开始日期">
-                  <span class="date-arrow">→</span>
-                  <input id="summaryEnd" type="date" value="2026-05-20" aria-label="结束日期">
-                </span>
+                <span class="field-label">轮次时间</span>
+                <select id="summaryRound" class="control">
+                  <option value="">全部轮次</option>
+                  <option value="00:00">00:00</option>
+                  <option value="08:00">08:00</option>
+                  <option value="16:00">16:00</option>
+                </select>
               </label>
               <div class="action-row" aria-label="汇总操作">
                 <button id="summaryReset" class="button reset" type="button">重置</button>
@@ -1189,11 +1206,6 @@
                 <div id="metricMaker" class="metric-value maker">0.0000</div>
                 <div class="metric-sub">收取与支出差额归集</div>
               </div>
-              <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="校验公式：对用户收取 - 对用户支出 - 做市收取 = 0">账务校验</div>
-                <div id="metricCheck" class="metric-value">通过</div>
-                <div class="metric-sub">收取 - 支出 - 做市收取 = 0</div>
-              </div>
             </div>
 
             <div class="table-toolbar">
@@ -1212,7 +1224,6 @@
                   <col style="width: 146px">
                   <col style="width: 146px">
                   <col style="width: 146px">
-                  <col style="width: 96px">
                   <col style="width: 92px">
                 </colgroup>
                 <thead>
@@ -1225,7 +1236,6 @@
                     <th>对用户收取</th>
                     <th>对用户支出</th>
                     <th>做市收取</th>
-                    <th>是否收取</th>
                     <th>操作</th>
                   </tr>
                 </thead>
@@ -1242,7 +1252,7 @@
             </div>
             <div class="hint-line">
               <strong>汇总口径</strong>
-              <span>未选择标的时，同一日期同一时间节点汇总全部标的；选择标的后展示该标的在 00:00、08:00、16:00 三轮的汇总。</span>
+              <span>未选择标的时展示 BTC_USDT、ETH_USDT、SOL_USDT、XRP_USDT 各自的 00:00、08:00、16:00 三轮记录；未到达的轮次不展示。</span>
             </div>
           </section>
 
@@ -1250,12 +1260,25 @@
             <div class="filters detail-filters" aria-label="明细筛选">
               <label class="field">
                 <span class="field-label">标的</span>
-                <select id="detailSymbol" class="control">
+                <select id="detailSymbol" class="control" disabled>
                   <option value="">全部标的</option>
                   <option value="BTC_USDT">BTC_USDT</option>
                   <option value="ETH_USDT">ETH_USDT</option>
                   <option value="SOL_USDT">SOL_USDT</option>
                   <option value="XRP_USDT">XRP_USDT</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">日期</span>
+                <input id="detailDate" class="control" type="date" disabled>
+              </label>
+              <label class="field">
+                <span class="field-label">轮次时间</span>
+                <select id="detailRound" class="control" disabled>
+                  <option value="">请选择轮次</option>
+                  <option value="00:00">00:00</option>
+                  <option value="08:00">08:00</option>
+                  <option value="16:00">16:00</option>
                 </select>
               </label>
               <label class="field">
@@ -1265,23 +1288,6 @@
               <label class="field">
                 <span class="field-label">用户 UID</span>
                 <input id="detailUid" class="control" type="text" inputmode="numeric" placeholder="用户ID">
-              </label>
-              <label class="field">
-                <span class="field-label">时间范围</span>
-                <span class="control date-range-control">
-                  <input id="detailStart" type="date" value="2026-05-18" aria-label="开始日期">
-                  <span class="date-arrow">→</span>
-                  <input id="detailEnd" type="date" value="2026-05-20" aria-label="结束日期">
-                </span>
-              </label>
-              <label class="field">
-                <span class="field-label">轮次时间</span>
-                <select id="detailRound" class="control">
-                  <option value="">全部轮次</option>
-                  <option value="00:00">00:00</option>
-                  <option value="08:00">08:00</option>
-                  <option value="16:00">16:00</option>
-                </select>
               </label>
               <div class="action-row" aria-label="明细操作">
                 <button id="detailReset" class="button reset" type="button">重置</button>
@@ -1323,24 +1329,27 @@
               <table class="detail-table" aria-label="资金费明细表">
                 <colgroup>
                   <col style="width: 68px">
+                  <col style="width: 170px">
                   <col style="width: 120px">
                   <col style="width: 130px">
                   <col style="width: 130px">
-                  <col style="width: 130px">
+                  <col style="width: 116px">
+                  <col style="width: 104px">
                   <col style="width: 112px">
                   <col style="width: 120px">
                   <col style="width: 150px">
                   <col style="width: 120px">
                   <col style="width: 140px">
                   <col style="width: 130px">
-                  <col style="width: 170px">
                 </colgroup>
                 <thead>
                   <tr>
                     <th>序号</th>
+                    <th>资金费用记录ID</th>
                     <th>合约名</th>
                     <th>合约账户ID</th>
                     <th>用户UID</th>
+                    <th>日期</th>
                     <th>轮次时间</th>
                     <th>仓位模式</th>
                     <th>仓位方向</th>
@@ -1348,7 +1357,6 @@
                     <th>资金费率</th>
                     <th>资金费用</th>
                     <th>账单类型</th>
-                    <th>时间戳</th>
                   </tr>
                 </thead>
                 <tbody id="detailBody"></tbody>
@@ -1365,7 +1373,7 @@
             </div>
             <div class="hint-line">
               <strong>明细口径</strong>
-              <span>按标的查看每轮 UID 账单；输入 UID 后可追踪该用户在不同时间点的仓位模式、仓位方向、仓位价值、资金费率和资金费用。</span>
+              <span>资金账单明细必须从资金费汇总中的某一条具体标的、日期、轮次进入；进入后可继续按账户 ID 或用户 UID 缩小范围。</span>
             </div>
           </section>
         </section>
@@ -1376,86 +1384,75 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
+    const symbolOrder = ["BTC_USDT", "ETH_USDT", "SOL_USDT", "XRP_USDT"];
+    const roundOrder = ["00:00", "08:00", "16:00"];
+
     const rounds = [
-      { date: "2026-05-20", time: "00:00", symbol: "BTC_USDT", rate: 0.0445, charge: 642.8881, payout: 596.1184 },
-      { date: "2026-05-19", time: "16:00", symbol: "BTC_USDT", rate: 0.0442, charge: 766.2085, payout: 704.8831 },
-      { date: "2026-05-19", time: "08:00", symbol: "BTC_USDT", rate: 0.0331, charge: 571.7243, payout: 525.3029 },
       { date: "2026-05-19", time: "00:00", symbol: "BTC_USDT", rate: 0.0567, charge: 1401.7583, payout: 1268.7426 },
-      { date: "2026-05-18", time: "16:00", symbol: "BTC_USDT", rate: 0.0417, charge: 685.9969, payout: 637.4407 },
-      { date: "2026-05-18", time: "08:00", symbol: "BTC_USDT", rate: 0.0464, charge: 1139.1393, payout: 1042.9285 },
-      { date: "2026-05-18", time: "00:00", symbol: "BTC_USDT", rate: 0.0442, charge: 634.5527, payout: 577.2902 },
-      { date: "2026-05-20", time: "00:00", symbol: "ETH_USDT", rate: 0.0318, charge: 389.2204, payout: 342.7789 },
-      { date: "2026-05-19", time: "16:00", symbol: "ETH_USDT", rate: 0.0289, charge: 452.4408, payout: 405.1197 },
-      { date: "2026-05-19", time: "08:00", symbol: "ETH_USDT", rate: 0.0264, charge: 318.6119, payout: 284.2011 },
+      { date: "2026-05-19", time: "08:00", symbol: "BTC_USDT", rate: 0.0331, charge: 571.7243, payout: 525.3029 },
+      { date: "2026-05-19", time: "16:00", symbol: "BTC_USDT", rate: 0.0442, charge: 766.2085, payout: 704.8831 },
       { date: "2026-05-19", time: "00:00", symbol: "ETH_USDT", rate: 0.0391, charge: 577.0342, payout: 515.7742 },
-      { date: "2026-05-18", time: "16:00", symbol: "ETH_USDT", rate: 0.0308, charge: 402.1176, payout: 358.9193 },
-      { date: "2026-05-18", time: "08:00", symbol: "ETH_USDT", rate: 0.0342, charge: 528.7712, payout: 476.8012 },
-      { date: "2026-05-18", time: "00:00", symbol: "ETH_USDT", rate: 0.0296, charge: 366.3321, payout: 321.8808 },
-      { date: "2026-05-20", time: "00:00", symbol: "SOL_USDT", rate: 0.0184, charge: 121.0446, payout: 98.6274 },
-      { date: "2026-05-19", time: "16:00", symbol: "SOL_USDT", rate: 0.0212, charge: 156.1195, payout: 133.8435 },
-      { date: "2026-05-19", time: "08:00", symbol: "SOL_USDT", rate: 0.0176, charge: 110.8048, payout: 91.5055 },
+      { date: "2026-05-19", time: "08:00", symbol: "ETH_USDT", rate: 0.0264, charge: 318.6119, payout: 284.2011 },
+      { date: "2026-05-19", time: "16:00", symbol: "ETH_USDT", rate: 0.0289, charge: 452.4408, payout: 405.1197 },
       { date: "2026-05-19", time: "00:00", symbol: "SOL_USDT", rate: 0.0241, charge: 191.7732, payout: 161.4041 },
-      { date: "2026-05-18", time: "16:00", symbol: "SOL_USDT", rate: 0.0193, charge: 142.4418, payout: 122.5037 },
-      { date: "2026-05-18", time: "08:00", symbol: "SOL_USDT", rate: 0.0225, charge: 164.7723, payout: 139.6642 },
-      { date: "2026-05-18", time: "00:00", symbol: "SOL_USDT", rate: 0.0206, charge: 151.0084, payout: 127.3022 },
-      { date: "2026-05-20", time: "00:00", symbol: "XRP_USDT", rate: 0.0122, charge: 72.6631, payout: 59.5519 },
-      { date: "2026-05-19", time: "16:00", symbol: "XRP_USDT", rate: 0.0148, charge: 95.6404, payout: 79.4473 },
-      { date: "2026-05-19", time: "08:00", symbol: "XRP_USDT", rate: 0.0119, charge: 68.3502, payout: 55.7265 },
+      { date: "2026-05-19", time: "08:00", symbol: "SOL_USDT", rate: 0.0176, charge: 110.8048, payout: 91.5055 },
+      { date: "2026-05-19", time: "16:00", symbol: "SOL_USDT", rate: 0.0212, charge: 156.1195, payout: 133.8435 },
       { date: "2026-05-19", time: "00:00", symbol: "XRP_USDT", rate: 0.0153, charge: 99.7785, payout: 81.1046 },
-      { date: "2026-05-18", time: "16:00", symbol: "XRP_USDT", rate: 0.0129, charge: 80.1917, payout: 66.9524 },
-      { date: "2026-05-18", time: "08:00", symbol: "XRP_USDT", rate: 0.0138, charge: 88.4478, payout: 71.3341 },
-      { date: "2026-05-18", time: "00:00", symbol: "XRP_USDT", rate: 0.0127, charge: 76.4491, payout: 63.3802 }
+      { date: "2026-05-19", time: "08:00", symbol: "XRP_USDT", rate: 0.0119, charge: 68.3502, payout: 55.7265 },
+      { date: "2026-05-19", time: "16:00", symbol: "XRP_USDT", rate: 0.0148, charge: 95.6404, payout: 79.4473 }
     ].map((item) => ({ ...item, maker: round4(item.charge - item.payout) }));
 
-    const detailRows = [
-      detail("BTC_USDT", "11255752", "11255752", "2026-05-20", "00:00", "空", 596.6766, 0.0445, 0.2655, "payout"),
-      detail("BTC_USDT", "11259919", "11259919", "2026-05-20", "00:00", "空", 30598.8, 0.0445, 13.6164, "payout"),
-      detail("BTC_USDT", "11240259", "11240259", "2026-05-20", "00:00", "多", 703.7724, 0.0445, 0.3131, "charge"),
-      detail("BTC_USDT", "11256101", "11256101", "2026-05-20", "00:00", "多", 1713.5328, 0.0445, 0.7625, "charge"),
-      detail("BTC_USDT", "11246951", "11246951", "2026-05-20", "00:00", "空", 589.0269, 0.0445, 0.2621, "payout"),
-      detail("BTC_USDT", "11256257", "11256257", "2026-05-20", "00:00", "多", 19124.25, 0.0445, 8.5102, "charge"),
-      detail("BTC_USDT", "11259749", "11259749", "2026-05-20", "00:00", "空", 152.994, 0.0445, 0.0680, "payout"),
-      detail("BTC_USDT", "11248122", "11248122", "2026-05-20", "00:00", "空", 24976.2705, 0.0445, 11.1144, "payout"),
-      detail("BTC_USDT", "11254731", "11254731", "2026-05-20", "00:00", "多", 9814.5651, 0.0445, 4.3674, "charge"),
-      detail("BTC_USDT", "11257730", "11257730", "2026-05-20", "00:00", "多", 4352.6793, 0.0445, 1.9369, "charge"),
-      detail("BTC_USDT", "MM90001", "90001", "2026-05-20", "00:00", "空", 102598.5448, 0.0445, 46.7697, "maker"),
-      detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "00:00", "多", 14855.21, 0.0442, 6.5659, "charge"),
-      detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "08:00", "多", 32418.72, 0.0464, 15.0423, "charge"),
-      detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "16:00", "空", 17789.34, 0.0417, 7.4181, "payout"),
-      detail("BTC_USDT", "11247887", "11247887", "2026-05-19", "00:00", "多", 64211.58, 0.0567, 36.4080, "charge"),
-      detail("BTC_USDT", "11247887", "11247887", "2026-05-19", "08:00", "空", 25120.40, 0.0331, 8.3135, "payout"),
-      detail("BTC_USDT", "11247887", "11247887", "2026-05-19", "16:00", "多", 39502.80, 0.0442, 17.4602, "charge"),
-      detail("ETH_USDT", "11247887", "11247887", "2026-05-20", "00:00", "空", 11342.85, 0.0318, 3.6070, "payout"),
-      detail("ETH_USDT", "11271026", "11271026", "2026-05-20", "00:00", "多", 22109.44, 0.0318, 7.0314, "charge"),
-      detail("ETH_USDT", "11270192", "11270192", "2026-05-19", "16:00", "空", 18420.35, 0.0289, 5.3235, "payout"),
-      detail("ETH_USDT", "MM90002", "90002", "2026-05-19", "16:00", "多", 163741.18, 0.0289, 47.3211, "maker"),
-      detail("SOL_USDT", "11268944", "11268944", "2026-05-19", "08:00", "多", 6049.24, 0.0176, 1.0647, "charge"),
-      detail("SOL_USDT", "11267111", "11267111", "2026-05-19", "00:00", "空", 7820.13, 0.0241, 1.8846, "payout"),
-      detail("XRP_USDT", "11263348", "11263348", "2026-05-18", "16:00", "多", 15922.74, 0.0129, 2.0530, "charge"),
-      detail("XRP_USDT", "MM90003", "90003", "2026-05-18", "08:00", "空", 124012.32, 0.0138, 17.1137, "maker")
-    ];
+    const detailRows = rounds.flatMap(buildRoundDetails);
 
     const $ = (id) => document.getElementById(id);
 
     const summaryState = {
       symbol: "",
-      date: "2026-05-19",
-      start: "2026-05-18",
-      end: "2026-05-20"
+      round: ""
     };
 
     const detailState = {
       symbol: "",
+      date: "",
+      round: "",
       account: "",
       uid: "",
-      start: "2026-05-18",
-      end: "2026-05-20",
-      round: ""
+      locked: false
     };
 
-    function detail(symbol, accountId, uid, date, time, side, positionValue, rate, fee, billType) {
-      const ts = `${date} ${time}:00`;
+    function buildRoundDetails(row, roundIndex) {
+      const symbolOffset = symbolOrder.indexOf(row.symbol) + 1;
+      const baseAccount = 11230000 + symbolOffset * 1000 + roundIndex * 10;
+      const baseUid = 81200000 + symbolOffset * 1000 + roundIndex * 10;
+      const chargeMain = round4(row.charge * 0.58);
+      const chargeRest = round4(row.charge - chargeMain);
+      const payoutMain = round4(row.payout * 0.61);
+      const payoutRest = round4(row.payout - payoutMain);
+      const makerFee = round4(row.maker);
+
+      return [
+        detail(makeRecordId(row, 1), row.symbol, String(baseAccount + 1), String(baseUid + 1), row.date, row.time, "多", positionValueFromFee(chargeMain, row.rate), row.rate, chargeMain, "charge"),
+        detail(makeRecordId(row, 2), row.symbol, String(baseAccount + 2), String(baseUid + 2), row.date, row.time, "多", positionValueFromFee(chargeRest, row.rate), row.rate, chargeRest, "charge"),
+        detail(makeRecordId(row, 3), row.symbol, String(baseAccount + 3), String(baseUid + 3), row.date, row.time, "空", positionValueFromFee(payoutMain, row.rate), row.rate, payoutMain, "payout"),
+        detail(makeRecordId(row, 4), row.symbol, String(baseAccount + 4), String(baseUid + 4), row.date, row.time, "空", positionValueFromFee(payoutRest, row.rate), row.rate, payoutRest, "payout"),
+        detail(makeRecordId(row, 5), row.symbol, `MM${90000 + symbolOffset}`, String(90000 + symbolOffset), row.date, row.time, "多", positionValueFromFee(makerFee, row.rate), row.rate, makerFee, "maker")
+      ];
+    }
+
+    function makeRecordId(row, index) {
+      const dateKey = row.date.replaceAll("-", "");
+      const timeKey = row.time.replace(":", "");
+      const symbolKey = row.symbol.replace("_USDT", "");
+      return `FF-${dateKey}-${timeKey}-${symbolKey}-${String(index).padStart(2, "0")}`;
+    }
+
+    function positionValueFromFee(fee, rate) {
+      return round4((fee * 100) / rate);
+    }
+
+    function detail(recordId, symbol, accountId, uid, date, time, side, positionValue, rate, fee, billType) {
       return {
+        recordId,
         symbol,
         accountId,
         uid,
@@ -1466,8 +1463,7 @@
         positionValue,
         rate,
         fee,
-        billType,
-        timestamp: ts
+        billType
       };
     }
 
@@ -1499,59 +1495,23 @@
       return `<span class="${className}">${formatMoney(value)}</span><span class="unit">USDT</span>`;
     }
 
-    function inDateRange(date, start, end) {
-      if (start && date < start) return false;
-      if (end && date > end) return false;
-      return true;
+    function sortSummaryRows(a, b) {
+      const symbolDiff = symbolOrder.indexOf(a.symbol) - symbolOrder.indexOf(b.symbol);
+      if (symbolDiff !== 0) return symbolDiff;
+      if (a.date !== b.date) return b.date.localeCompare(a.date);
+      return roundOrder.indexOf(a.time) - roundOrder.indexOf(b.time);
     }
 
-    function groupSummary(rows, symbol) {
-      if (symbol) {
-        return rows.map((row) => ({ ...row, displaySymbol: row.symbol }));
-      }
-
-      const grouped = new Map();
-      rows.forEach((row) => {
-        const key = `${row.date}|${row.time}`;
-        const current = grouped.get(key) || {
-          date: row.date,
-          time: row.time,
-          symbol: "",
-          displaySymbol: "全部标的",
-          rate: 0,
-          charge: 0,
-          payout: 0,
-          maker: 0,
-          count: 0
-        };
-        current.charge += row.charge;
-        current.payout += row.payout;
-        current.maker += row.maker;
-        current.rate += row.rate;
-        current.count += 1;
-        grouped.set(key, current);
-      });
-
-      return Array.from(grouped.values()).map((row) => ({
-        ...row,
-        charge: round4(row.charge),
-        payout: round4(row.payout),
-        maker: round4(row.maker),
-        rate: round4(row.rate / row.count)
-      }));
-    }
-
-    function sortByTimeDesc(a, b) {
-      return `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`);
+    function sortDetailRows(a, b) {
+      return a.recordId.localeCompare(b.recordId);
     }
 
     function renderSummary() {
-      const source = rounds.filter((row) => {
-        const symbolMatch = !summaryState.symbol || row.symbol === summaryState.symbol;
-        const dateMatch = summaryState.date ? row.date === summaryState.date : inDateRange(row.date, summaryState.start, summaryState.end);
-        return symbolMatch && dateMatch;
-      });
-      const rows = groupSummary(source, summaryState.symbol).sort(sortByTimeDesc);
+      const rows = rounds.filter((row) => {
+        if (summaryState.symbol && row.symbol !== summaryState.symbol) return false;
+        if (summaryState.round && row.time !== summaryState.round) return false;
+        return true;
+      }).sort(sortSummaryRows);
       const total = rows.reduce((acc, row) => {
         acc.charge += row.charge;
         acc.payout += row.payout;
@@ -1561,30 +1521,24 @@
       total.charge = round4(total.charge);
       total.payout = round4(total.payout);
       total.maker = round4(total.maker);
-      const checkDiff = round4(total.charge - total.payout - total.maker);
 
       $("metricCharge").textContent = formatMoney(total.charge);
       $("metricPayout").textContent = formatMoney(total.payout);
       $("metricMaker").textContent = formatMoney(total.maker);
-      $("metricCheck").textContent = Math.abs(checkDiff) < 0.0001 ? "通过" : `差额 ${formatMoney(checkDiff)}`;
-      $("metricCheck").style.color = Math.abs(checkDiff) < 0.0001 ? "var(--green)" : "var(--red)";
 
       const tbody = $("summaryBody");
       tbody.innerHTML = rows.map((row, index) => {
-        const ok = Math.abs(round4(row.charge - row.payout - row.maker)) < 0.0001;
-        const detailSymbol = row.symbol || "";
         return `
           <tr>
             <td>${index + 1}</td>
             <td>${row.date}</td>
             <td>${row.time}</td>
-            <td>${row.displaySymbol}</td>
+            <td>${row.symbol}</td>
             <td>${formatMoney(row.rate)}%</td>
             <td class="num">${moneyCell(row.charge, "money-charge")}</td>
             <td class="num">${moneyCell(row.payout, "money-payout")}</td>
             <td class="num">${moneyCell(row.maker, "money-maker")}</td>
-            <td><span class="tag ok">${ok ? "已收取" : "未收取"}</span></td>
-            <td><button class="link-button" type="button" data-detail-date="${row.date}" data-detail-time="${row.time}" data-detail-symbol="${detailSymbol}">资金明细</button></td>
+            <td><button class="link-button" type="button" data-detail-date="${row.date}" data-detail-time="${row.time}" data-detail-symbol="${row.symbol}">资金明细</button></td>
           </tr>
         `;
       }).join("");
@@ -1594,16 +1548,16 @@
       $("summaryPagerCount").textContent = `共 ${rows.length} 条`;
       tbody.querySelectorAll("[data-detail-date]").forEach((button) => {
         button.addEventListener("click", () => {
-          detailState.symbol = button.dataset.detailSymbol || summaryState.symbol || "";
-          detailState.start = button.dataset.detailDate;
-          detailState.end = button.dataset.detailDate;
+          detailState.symbol = button.dataset.detailSymbol;
+          detailState.date = button.dataset.detailDate;
           detailState.round = button.dataset.detailTime;
           detailState.account = "";
           detailState.uid = "";
+          detailState.locked = true;
           syncDetailControls();
           switchTab("detail");
           renderDetail();
-          showToast("已按当前汇总轮次带入明细筛选");
+          showToast("已带入标的、日期和轮次时间");
         });
       });
     }
@@ -1627,13 +1581,29 @@
     }
 
     function renderDetail() {
+      const tbody = $("detailBody");
+
+      if (!detailState.locked) {
+        tbody.innerHTML = "";
+        $("detailFeeMetric").textContent = "0.0000";
+        $("detailUidMetric").textContent = "0";
+        $("detailChargeMetric").textContent = "0.0000";
+        $("detailPayoutMetric").textContent = "0.0000";
+        $("detailEmpty").textContent = "请先从资金费汇总选择一条具体标的、日期和轮次记录";
+        $("detailEmpty").style.display = "block";
+        $("detailMeta").textContent = "待选择轮次";
+        $("detailPagerCount").textContent = "共 0 条";
+        return;
+      }
+
       const rows = detailRows.filter((row) => {
-        if (detailState.symbol && row.symbol !== detailState.symbol) return false;
+        if (row.symbol !== detailState.symbol) return false;
+        if (row.date !== detailState.date) return false;
+        if (row.time !== detailState.round) return false;
         if (detailState.account && !row.accountId.includes(detailState.account)) return false;
         if (detailState.uid && !row.uid.includes(detailState.uid)) return false;
-        if (detailState.round && row.time !== detailState.round) return false;
-        return inDateRange(row.date, detailState.start, detailState.end);
-      }).sort(sortByTimeDesc);
+        return true;
+      }).sort(sortDetailRows);
 
       const totals = rows.reduce((acc, row) => {
         acc.fee += Math.abs(row.fee);
@@ -1648,26 +1618,27 @@
       $("detailChargeMetric").textContent = formatMoney(round4(totals.charge));
       $("detailPayoutMetric").textContent = formatMoney(round4(totals.payout));
 
-      const tbody = $("detailBody");
       tbody.innerHTML = rows.map((row, index) => {
         return `
           <tr>
             <td>${index + 1}</td>
+            <td>${row.recordId}</td>
             <td>${row.symbol}</td>
             <td>${row.accountId}</td>
             <td>${row.uid}</td>
-            <td>${row.date} ${row.time}</td>
+            <td>${row.date}</td>
+            <td>${row.time}</td>
             <td><span class="tag mode">${row.positionMode}</span></td>
             <td><span class="tag ${sideClass(row.side)}">${row.side}仓</span></td>
             <td class="num">${formatNumber(row.positionValue)}<span class="unit">USDT</span></td>
             <td>${formatMoney(row.rate)}%</td>
             <td class="num">${moneyCell(row.fee, row.billType === "payout" ? "money-payout" : row.billType === "maker" ? "money-maker" : "money-charge")}</td>
             <td><span class="tag ${billTypeClass(row.billType)}">${billTypeLabel(row.billType)}</span></td>
-            <td>${row.timestamp}</td>
           </tr>
         `;
       }).join("");
 
+      $("detailEmpty").textContent = "暂无匹配的 UID 资金费明细";
       $("detailEmpty").style.display = rows.length ? "none" : "block";
       $("detailMeta").textContent = `共 ${rows.length} 条记录`;
       $("detailPagerCount").textContent = `共 ${rows.length} 条`;
@@ -1685,27 +1656,23 @@
 
     function syncSummaryState() {
       summaryState.symbol = $("summarySymbol").value;
-      summaryState.date = $("summaryDate").value;
-      summaryState.start = $("summaryStart").value;
-      summaryState.end = $("summaryEnd").value;
+      summaryState.round = $("summaryRound").value;
     }
 
     function syncDetailState() {
       detailState.symbol = $("detailSymbol").value;
+      detailState.date = $("detailDate").value;
+      detailState.round = $("detailRound").value;
       detailState.account = $("detailAccount").value.trim();
       detailState.uid = $("detailUid").value.trim();
-      detailState.start = $("detailStart").value;
-      detailState.end = $("detailEnd").value;
-      detailState.round = $("detailRound").value;
     }
 
     function syncDetailControls() {
       $("detailSymbol").value = detailState.symbol;
+      $("detailDate").value = detailState.date;
+      $("detailRound").value = detailState.round;
       $("detailAccount").value = detailState.account;
       $("detailUid").value = detailState.uid;
-      $("detailStart").value = detailState.start;
-      $("detailEnd").value = detailState.end;
-      $("detailRound").value = detailState.round;
     }
 
     function showToast(message) {
@@ -1734,7 +1701,11 @@
     }
 
     $("summaryTab").addEventListener("click", () => switchTab("summary"));
-    $("detailTab").addEventListener("click", () => switchTab("detail"));
+    $("detailTab").addEventListener("click", () => {
+      switchTab("detail");
+      renderDetail();
+      if (!detailState.locked) showToast("请先从资金费汇总选择一条资金明细");
+    });
     $("themeToggle").addEventListener("click", () => {
       const nextTheme = document.body.dataset.theme === "dark" ? "light" : "dark";
       setTheme(nextTheme);
@@ -1766,9 +1737,7 @@
     $("summaryExport").addEventListener("click", () => showToast("导出入口已预留"));
     $("summaryReset").addEventListener("click", () => {
       $("summarySymbol").value = "";
-      $("summaryDate").value = "2026-05-19";
-      $("summaryStart").value = "2026-05-18";
-      $("summaryEnd").value = "2026-05-20";
+      $("summaryRound").value = "";
       syncSummaryState();
       renderSummary();
       showToast("汇总筛选已重置");
@@ -1781,30 +1750,15 @@
     $("detailEdit").addEventListener("click", () => showToast("指标编辑入口已预留"));
     $("detailExport").addEventListener("click", () => showToast("导出入口已预留"));
     $("detailReset").addEventListener("click", () => {
-      $("detailSymbol").value = "";
       $("detailAccount").value = "";
       $("detailUid").value = "";
-      $("detailStart").value = "2026-05-18";
-      $("detailEnd").value = "2026-05-20";
-      $("detailRound").value = "";
       syncDetailState();
       renderDetail();
-      showToast("明细筛选已重置");
-    });
-    $("summaryDate").addEventListener("change", () => {
-      if ($("summaryDate").value) {
-        $("summaryStart").value = "";
-        $("summaryEnd").value = "";
-      }
-    });
-    $("summaryStart").addEventListener("change", () => {
-      $("summaryDate").value = "";
-    });
-    $("summaryEnd").addEventListener("change", () => {
-      $("summaryDate").value = "";
+      showToast("明细账户与 UID 筛选已重置");
     });
 
     setTheme("dark");
+    syncDetailControls();
     renderSummary();
     renderDetail();
   </script>
