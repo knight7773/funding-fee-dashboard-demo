@@ -59,6 +59,9 @@
       --tag-maker-text: #b89cff;
       --tag-maker-bg: #1a1130;
       --tag-maker-border: #6e55c5;
+      --tag-mode-text: #d7dae2;
+      --tag-mode-bg: #15161a;
+      --tag-mode-border: #373941;
       --tag-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
       --shadow: none;
       color-scheme: dark;
@@ -111,6 +114,9 @@
       --tag-maker-text: #594ad6;
       --tag-maker-bg: #f0eeff;
       --tag-maker-border: #d3cff9;
+      --tag-mode-text: #344054;
+      --tag-mode-bg: #f7f9fc;
+      --tag-mode-border: #d8dde7;
       --tag-shadow: none;
       --shadow: 0 8px 22px rgba(31, 38, 51, 0.06);
       color-scheme: light;
@@ -766,7 +772,7 @@
     }
 
     .detail-table {
-      min-width: 1480px;
+      min-width: 1740px;
     }
 
     thead {
@@ -873,6 +879,13 @@
       color: var(--tag-maker-text);
       background: var(--tag-maker-bg);
       border: 1px solid var(--tag-maker-border);
+      box-shadow: var(--tag-shadow);
+    }
+
+    .tag.mode {
+      color: var(--tag-mode-text);
+      background: var(--tag-mode-bg);
+      border: 1px solid var(--tag-mode-border);
       box-shadow: var(--tag-shadow);
     }
 
@@ -1213,7 +1226,7 @@
                     <th>对用户收取</th>
                     <th>对用户支出</th>
                     <th>做市收取</th>
-                    <th>校验</th>
+                    <th>是否收取</th>
                     <th>操作</th>
                   </tr>
                 </thead>
@@ -1315,6 +1328,7 @@
                   <col style="width: 130px">
                   <col style="width: 130px">
                   <col style="width: 130px">
+                  <col style="width: 112px">
                   <col style="width: 120px">
                   <col style="width: 150px">
                   <col style="width: 120px">
@@ -1331,6 +1345,7 @@
                     <th>合约账户ID</th>
                     <th>用户UID</th>
                     <th>轮次时间</th>
+                    <th>仓位模式</th>
                     <th>仓位方向</th>
                     <th>仓位价值</th>
                     <th>资金费率</th>
@@ -1355,7 +1370,7 @@
             </div>
             <div class="hint-line">
               <strong>明细口径</strong>
-              <span>按标的查看每轮 UID 账单；输入 UID 后可追踪该用户在不同时间点的仓位方向、仓位价值、资金费率和资金费用。</span>
+              <span>按标的查看每轮 UID 账单；输入 UID 后可追踪该用户在不同时间点的仓位模式、仓位方向、仓位价值、资金费率和资金费用。</span>
             </div>
           </section>
         </section>
@@ -1408,7 +1423,7 @@
       detail("BTC_USDT", "11248122", "11248122", "2026-05-20", "00:00", "空", 24976.2705, 0.0445, 11.1144, "payout"),
       detail("BTC_USDT", "11254731", "11254731", "2026-05-20", "00:00", "多", 9814.5651, 0.0445, 4.3674, "charge"),
       detail("BTC_USDT", "11257730", "11257730", "2026-05-20", "00:00", "多", 4352.6793, 0.0445, 1.9369, "charge"),
-      detail("BTC_USDT", "MM90001", "90001", "2026-05-20", "00:00", "做市", 102598.5448, 0.0445, 46.7697, "maker"),
+      detail("BTC_USDT", "MM90001", "90001", "2026-05-20", "00:00", "空", 102598.5448, 0.0445, 46.7697, "maker"),
       detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "00:00", "多", 14855.21, 0.0442, 6.5659, "charge"),
       detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "08:00", "多", 32418.72, 0.0464, 15.0423, "charge"),
       detail("BTC_USDT", "11247887", "11247887", "2026-05-18", "16:00", "空", 17789.34, 0.0417, 7.4181, "payout"),
@@ -1418,11 +1433,11 @@
       detail("ETH_USDT", "11247887", "11247887", "2026-05-20", "00:00", "空", 11342.85, 0.0318, 3.6070, "payout"),
       detail("ETH_USDT", "11271026", "11271026", "2026-05-20", "00:00", "多", 22109.44, 0.0318, 7.0314, "charge"),
       detail("ETH_USDT", "11270192", "11270192", "2026-05-19", "16:00", "空", 18420.35, 0.0289, 5.3235, "payout"),
-      detail("ETH_USDT", "MM90002", "90002", "2026-05-19", "16:00", "做市", 163741.18, 0.0289, 47.3211, "maker"),
+      detail("ETH_USDT", "MM90002", "90002", "2026-05-19", "16:00", "多", 163741.18, 0.0289, 47.3211, "maker"),
       detail("SOL_USDT", "11268944", "11268944", "2026-05-19", "08:00", "多", 6049.24, 0.0176, 1.0647, "charge"),
       detail("SOL_USDT", "11267111", "11267111", "2026-05-19", "00:00", "空", 7820.13, 0.0241, 1.8846, "payout"),
       detail("XRP_USDT", "11263348", "11263348", "2026-05-18", "16:00", "多", 15922.74, 0.0129, 2.0530, "charge"),
-      detail("XRP_USDT", "MM90003", "90003", "2026-05-18", "08:00", "做市", 124012.32, 0.0138, 17.1137, "maker")
+      detail("XRP_USDT", "MM90003", "90003", "2026-05-18", "08:00", "空", 124012.32, 0.0138, 17.1137, "maker")
     ];
 
     const $ = (id) => document.getElementById(id);
@@ -1451,6 +1466,7 @@
         uid,
         date,
         time,
+        positionMode: inferPositionMode(uid, date, time),
         side,
         positionValue,
         rate,
@@ -1458,6 +1474,12 @@
         billType,
         timestamp: ts
       };
+    }
+
+    function inferPositionMode(uid, date, time) {
+      const seed = `${uid}${date.replaceAll("-", "")}${time.replace(":", "")}`;
+      const total = Array.from(seed).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+      return total % 2 === 0 ? "全仓" : "逐仓";
     }
 
     function round4(value) {
@@ -1566,7 +1588,7 @@
             <td class="num">${moneyCell(row.charge, "money-charge")}</td>
             <td class="num">${moneyCell(row.payout, "money-payout")}</td>
             <td class="num">${moneyCell(row.maker, "money-maker")}</td>
-            <td><span class="tag ok">${ok ? "通过" : "异常"}</span></td>
+            <td><span class="tag ok">${ok ? "已收取" : "未收取"}</span></td>
             <td><button class="link-button" type="button" data-detail-date="${row.date}" data-detail-time="${row.time}" data-detail-symbol="${detailSymbol}">资金明细</button></td>
           </tr>
         `;
@@ -1606,7 +1628,7 @@
     function sideClass(side) {
       if (side === "多") return "long";
       if (side === "空") return "short";
-      return "maker";
+      return "";
     }
 
     function renderDetail() {
@@ -1642,7 +1664,8 @@
             <td>${row.accountId}</td>
             <td>${row.uid}</td>
             <td>${row.date} ${row.time}</td>
-            <td><span class="tag ${sideClass(row.side)}">${row.side === "做市" ? "做市账户" : row.side + "仓"}</span></td>
+            <td><span class="tag mode">${row.positionMode}</span></td>
+            <td><span class="tag ${sideClass(row.side)}">${row.side}仓</span></td>
             <td class="num">${formatNumber(row.positionValue)}<span class="unit">USDT</span></td>
             <td>${formatMoney(row.rate)}%</td>
             <td class="num">${moneyCell(row.fee, row.billType === "payout" ? "money-payout" : row.billType === "maker" ? "money-maker" : "money-charge")}</td>
