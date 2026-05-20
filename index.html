@@ -772,7 +772,7 @@
     }
 
     .detail-table {
-      min-width: 1740px;
+      min-width: 1520px;
     }
 
     thead {
@@ -1333,8 +1333,6 @@
                   <col style="width: 120px">
                   <col style="width: 140px">
                   <col style="width: 130px">
-                  <col style="width: 150px">
-                  <col style="width: 150px">
                   <col style="width: 170px">
                 </colgroup>
                 <thead>
@@ -1350,8 +1348,6 @@
                     <th>资金费率</th>
                     <th>资金费用</th>
                     <th>账单类型</th>
-                    <th>对用户收取</th>
-                    <th>对用户支出</th>
                     <th>时间戳</th>
                   </tr>
                 </thead>
@@ -1654,8 +1650,6 @@
 
       const tbody = $("detailBody");
       tbody.innerHTML = rows.map((row, index) => {
-        const chargeValue = row.billType === "charge" ? row.fee : 0;
-        const payoutValue = row.billType === "payout" ? row.fee : 0;
         return `
           <tr>
             <td>${index + 1}</td>
@@ -1669,8 +1663,6 @@
             <td>${formatMoney(row.rate)}%</td>
             <td class="num">${moneyCell(row.fee, row.billType === "payout" ? "money-payout" : row.billType === "maker" ? "money-maker" : "money-charge")}</td>
             <td><span class="tag ${billTypeClass(row.billType)}">${billTypeLabel(row.billType)}</span></td>
-            <td class="num">${chargeValue ? moneyCell(chargeValue, "money-charge") : '<span class="muted">-</span>'}</td>
-            <td class="num">${payoutValue ? moneyCell(payoutValue, "money-payout") : '<span class="muted">-</span>'}</td>
             <td>${row.timestamp}</td>
           </tr>
         `;
