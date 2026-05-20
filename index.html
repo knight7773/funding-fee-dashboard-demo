@@ -1583,6 +1583,11 @@
                 <div id="detailPayoutMetric" class="metric-value payout">0.0000</div>
                 <div class="metric-sub">交易所向用户支付的资金费合计</div>
               </div>
+              <div class="metric">
+                <div class="metric-label" tabindex="0" data-tooltip="做市账户收入或支出的资金费,单位USDT。">做市收支</div>
+                <div id="detailMakerMetric" class="metric-value maker">0.0000</div>
+                <div class="metric-sub">做市账户收入或支出的资金费,单位USDT。</div>
+              </div>
             </div>
 
             <div class="table-toolbar">
@@ -2003,6 +2008,7 @@
         $("detailUidMetric").textContent = "0";
         $("detailChargeMetric").textContent = "0.0000";
         $("detailPayoutMetric").textContent = "0.0000";
+        $("detailMakerMetric").textContent = "0.0000";
         $("detailEmpty").textContent = "请先从资金费汇总选择一条具体标的、日期和轮次记录";
         $("detailEmpty").style.display = "block";
         $("detailMeta").textContent = "待选择轮次";
@@ -2021,13 +2027,15 @@
       const totals = rows.reduce((acc, row) => {
         if (row.billType === "charge") acc.charge += row.fee;
         if (row.billType === "payout") acc.payout += row.fee;
+        if (row.billType === "maker") acc.maker += row.fee;
         acc.uids.add(row.uid);
         return acc;
-      }, { charge: 0, payout: 0, uids: new Set() });
+      }, { charge: 0, payout: 0, maker: 0, uids: new Set() });
 
       $("detailUidMetric").textContent = totals.uids.size;
       $("detailChargeMetric").textContent = formatMoney(round4(totals.charge));
       $("detailPayoutMetric").textContent = formatMoney(-round4(totals.payout));
+      $("detailMakerMetric").textContent = formatMoney(round4(totals.maker));
 
       tbody.innerHTML = rows.map((row, index) => {
         return `
