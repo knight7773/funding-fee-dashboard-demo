@@ -505,7 +505,7 @@
     }
 
     .summary-filters {
-      grid-template-columns: 160px 150px 150px minmax(120px, 1fr) repeat(4, 90px);
+      grid-template-columns: 160px minmax(390px, 1.2fr) minmax(80px, 1fr) repeat(4, 90px);
       gap: 12px;
     }
 
@@ -568,27 +568,88 @@
 
     .date-range-control {
       display: grid;
-      grid-template-columns: 1fr 18px 1fr;
-      gap: 8px;
+      grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr) 22px;
+      gap: 10px;
       align-items: center;
-      padding: 0 8px;
+      padding: 0 12px;
     }
 
-    .date-range-control input {
-      width: 100%;
+    .range-date {
+      position: relative;
       min-width: 0;
-      border: 0;
-      outline: 0;
-      background: transparent;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .range-display {
+      min-width: 0;
+      overflow: hidden;
       color: var(--control-text);
       font-size: 14px;
       font-weight: 650;
+      line-height: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .range-native-date {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: transparent;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    .range-native-date::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+    }
+
+    .range-date:focus-within .range-display {
+      color: var(--text-strong);
     }
 
     .date-arrow {
       color: #9aa2b2;
       text-align: center;
       font-weight: 800;
+    }
+
+    .range-calendar {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #737b8b;
+      border-radius: 3px;
+    }
+
+    .range-calendar::before,
+    .range-calendar::after {
+      position: absolute;
+      content: "";
+      left: 2px;
+      right: 2px;
+      height: 2px;
+      background: #737b8b;
+    }
+
+    .range-calendar::before {
+      top: 4px;
+    }
+
+    .range-calendar::after {
+      top: -4px;
+      left: 3px;
+      right: 3px;
+      height: 5px;
+      background: transparent;
+      border-left: 2px solid #737b8b;
+      border-right: 2px solid #737b8b;
     }
 
     .field-actions {
@@ -1187,14 +1248,21 @@
                   <option value="XRP_USDT">XRP_USDT</option>
                 </select>
               </label>
-              <label class="field">
-                <span class="field-label">开始日期</span>
-                <input id="summaryStartDate" class="control" type="date" value="2026-05-19">
-              </label>
-              <label class="field">
-                <span class="field-label">结束日期</span>
-                <input id="summaryEndDate" class="control" type="date" value="2026-05-19">
-              </label>
+              <div class="field">
+                <span class="field-label">时间范围</span>
+                <div class="control date-range-control" role="group" aria-label="时间范围">
+                  <span class="range-date">
+                    <span id="summaryStartDisplay" class="range-display">2026-05-19 00:00:00</span>
+                    <input id="summaryStartDate" class="range-native-date" type="date" value="2026-05-19" aria-label="开始日期">
+                  </span>
+                  <span class="date-arrow">→</span>
+                  <span class="range-date">
+                    <span id="summaryEndDisplay" class="range-display">2026-05-19 23:59:59</span>
+                    <input id="summaryEndDate" class="range-native-date" type="date" value="2026-05-19" aria-label="结束日期">
+                  </span>
+                  <span class="range-calendar" aria-hidden="true"></span>
+                </div>
+              </div>
               <div class="action-row" aria-label="汇总操作">
                 <button id="summaryReset" class="button reset" type="button">重置</button>
                 <button id="summaryEdit" class="button indicator" type="button">指标编辑</button>
@@ -1215,9 +1283,9 @@
                 <div class="metric-sub">交易所向用户支付的资金费合计</div>
               </div>
               <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="做市场账户收入或支出的资金费，单位 USDT">做市收支</div>
+                <div class="metric-label" tabindex="0" data-tooltip="做市账户收入或支出的资金费,单位USDT。">做市收支</div>
                 <div id="metricMaker" class="metric-value maker">0.0000</div>
-                <div class="metric-sub">做市场账户收入或支出的资金费，单位 USDT</div>
+                <div class="metric-sub">做市账户收入或支出的资金费,单位USDT。</div>
               </div>
             </div>
 
@@ -1511,6 +1579,16 @@
       });
     }
 
+    function formatRangeDisplay(date, boundary) {
+      if (!date) return boundary === "start" ? "开始日期 00:00:00" : "结束日期 23:59:59";
+      return `${date} ${boundary === "start" ? "00:00:00" : "23:59:59"}`;
+    }
+
+    function syncSummaryRangeDisplays() {
+      $("summaryStartDisplay").textContent = formatRangeDisplay($("summaryStartDate").value, "start");
+      $("summaryEndDisplay").textContent = formatRangeDisplay($("summaryEndDate").value, "end");
+    }
+
     function moneyCell(value, className = "") {
       return `<span class="${className}">${formatMoney(value)}</span><span class="unit">USDT</span>`;
     }
@@ -1674,6 +1752,7 @@
       summaryState.symbol = $("summarySymbol").value;
       summaryState.startDate = $("summaryStartDate").value;
       summaryState.endDate = $("summaryEndDate").value;
+      syncSummaryRangeDisplays();
     }
 
     function syncDetailState() {
@@ -1750,6 +1829,8 @@
     });
     $("summaryEdit").addEventListener("click", () => showToast("指标编辑入口已预留"));
     $("summaryExport").addEventListener("click", () => showToast("导出入口已预留"));
+    $("summaryStartDate").addEventListener("change", syncSummaryRangeDisplays);
+    $("summaryEndDate").addEventListener("change", syncSummaryRangeDisplays);
     $("summaryReset").addEventListener("click", () => {
       $("summarySymbol").value = "";
       $("summaryStartDate").value = "2026-05-19";
@@ -1773,6 +1854,7 @@
     });
 
     setTheme("dark");
+    syncSummaryRangeDisplays();
     syncDetailControls();
     renderSummary();
     renderDetail();
