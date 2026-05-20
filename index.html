@@ -60,9 +60,9 @@
       --tag-payout-text: var(--down);
       --tag-payout-bg: rgba(139, 97, 223, 0.14);
       --tag-payout-border: rgba(139, 97, 223, 0.46);
-      --tag-maker-text: var(--up);
-      --tag-maker-bg: rgba(32, 199, 176, 0.12);
-      --tag-maker-border: rgba(32, 199, 176, 0.42);
+      --tag-maker-text: #5ca8ff;
+      --tag-maker-bg: rgba(47, 124, 255, 0.14);
+      --tag-maker-border: rgba(47, 124, 255, 0.46);
       --tag-mode-text: #d7dae2;
       --tag-mode-bg: #15161a;
       --tag-mode-border: #373941;
@@ -119,9 +119,9 @@
       --tag-payout-text: var(--down);
       --tag-payout-bg: rgba(123, 85, 216, 0.1);
       --tag-payout-border: rgba(123, 85, 216, 0.3);
-      --tag-maker-text: var(--up);
-      --tag-maker-bg: rgba(11, 159, 136, 0.1);
-      --tag-maker-border: rgba(11, 159, 136, 0.28);
+      --tag-maker-text: #2563eb;
+      --tag-maker-bg: rgba(37, 99, 235, 0.1);
+      --tag-maker-border: rgba(37, 99, 235, 0.3);
       --tag-mode-text: #344054;
       --tag-mode-bg: #f7f9fc;
       --tag-mode-border: #d8dde7;
@@ -505,7 +505,7 @@
     }
 
     .summary-filters {
-      grid-template-columns: 160px 150px minmax(160px, 1fr) repeat(4, 90px);
+      grid-template-columns: 160px 150px 150px minmax(120px, 1fr) repeat(4, 90px);
       gap: 12px;
     }
 
@@ -799,7 +799,7 @@
     }
 
     .summary-table {
-      min-width: 1020px;
+      min-width: 1150px;
     }
 
     .detail-table {
@@ -1188,8 +1188,12 @@
                 </select>
               </label>
               <label class="field">
-                <span class="field-label">日期</span>
-                <input id="summaryDate" class="control" type="date" value="2026-05-19">
+                <span class="field-label">开始日期</span>
+                <input id="summaryStartDate" class="control" type="date" value="2026-05-19">
+              </label>
+              <label class="field">
+                <span class="field-label">结束日期</span>
+                <input id="summaryEndDate" class="control" type="date" value="2026-05-19">
               </label>
               <div class="action-row" aria-label="汇总操作">
                 <button id="summaryReset" class="button reset" type="button">重置</button>
@@ -1211,9 +1215,9 @@
                 <div class="metric-sub">交易所向用户支付的资金费合计</div>
               </div>
               <div class="metric">
-                <div class="metric-label" tabindex="0" data-tooltip="对用户收取与对用户支出的差额归集，单位 USDT">做市收取</div>
+                <div class="metric-label" tabindex="0" data-tooltip="做市场账户收入或支出的资金费，单位 USDT">做市收支</div>
                 <div id="metricMaker" class="metric-value maker">0.0000</div>
-                <div class="metric-sub">收取与支出差额归集</div>
+                <div class="metric-sub">做市场账户收入或支出的资金费，单位 USDT</div>
               </div>
             </div>
 
@@ -1232,6 +1236,7 @@
                   <col style="width: 112px">
                   <col style="width: 146px">
                   <col style="width: 146px">
+                  <col style="width: 118px">
                   <col style="width: 146px">
                   <col style="width: 92px">
                 </colgroup>
@@ -1244,7 +1249,8 @@
                     <th>资金费率</th>
                     <th>对用户收取</th>
                     <th>对用户支出</th>
-                    <th>做市收取</th>
+                    <th>做市账户</th>
+                    <th>做市收支</th>
                     <th>操作</th>
                   </tr>
                 </thead>
@@ -1261,7 +1267,7 @@
             </div>
             <div class="hint-line">
               <strong>汇总口径</strong>
-              <span>按日期查看各标的 00:00、08:00、16:00 三轮记录；未到达的轮次不展示。</span>
+              <span>按日期区间查看各标的 00:00、08:00、16:00 三轮记录；未到达的轮次不展示。</span>
             </div>
           </section>
 
@@ -1329,7 +1335,6 @@
               <table class="detail-table" aria-label="资金费明细表">
                 <colgroup>
                   <col style="width: 68px">
-                  <col style="width: 170px">
                   <col style="width: 120px">
                   <col style="width: 130px">
                   <col style="width: 116px">
@@ -1340,11 +1345,11 @@
                   <col style="width: 120px">
                   <col style="width: 140px">
                   <col style="width: 130px">
+                  <col style="width: 170px">
                 </colgroup>
                 <thead>
                   <tr>
                     <th>序号</th>
-                    <th>资金费用记录ID</th>
                     <th>合约名</th>
                     <th>用户UID</th>
                     <th>日期</th>
@@ -1355,6 +1360,7 @@
                     <th>资金费率</th>
                     <th>资金费用</th>
                     <th>账单类型</th>
+                    <th>资金费用记录ID</th>
                   </tr>
                 </thead>
                 <tbody id="detailBody"></tbody>
@@ -1371,7 +1377,7 @@
             </div>
             <div class="hint-line">
               <strong>明细口径</strong>
-              <span>资金账单明细必须从资金费汇总中的某一条具体标的、日期、轮次进入；进入后可继续按账户 ID 或用户 UID 缩小范围。</span>
+              <span>资金账单明细必须从资金费汇总中的某一条具体标的、日期、轮次进入；进入后可继续按用户 UID 缩小范围。</span>
             </div>
           </section>
         </section>
@@ -1384,6 +1390,12 @@
   <script>
     const symbolOrder = ["BTC_USDT", "ETH_USDT", "SOL_USDT", "XRP_USDT"];
     const roundOrder = ["00:00", "08:00", "16:00"];
+    const makerAccountBySymbol = {
+      BTC_USDT: "10070",
+      ETH_USDT: "10071",
+      SOL_USDT: "10072",
+      XRP_USDT: "10073"
+    };
 
     const rounds = [
       { date: "2026-05-18", time: "00:00", symbol: "BTC_USDT", rate: 0.0442, charge: 634.5527, payout: 577.2902 },
@@ -1418,7 +1430,8 @@
 
     const summaryState = {
       symbol: "",
-      date: "2026-05-19"
+      startDate: "2026-05-19",
+      endDate: "2026-05-19"
     };
 
     const detailState = {
@@ -1516,7 +1529,8 @@
     function renderSummary() {
       const rows = rounds.filter((row) => {
         if (summaryState.symbol && row.symbol !== summaryState.symbol) return false;
-        if (summaryState.date && row.date !== summaryState.date) return false;
+        if (summaryState.startDate && row.date < summaryState.startDate) return false;
+        if (summaryState.endDate && row.date > summaryState.endDate) return false;
         return true;
       }).sort(sortSummaryRows);
       const total = rows.reduce((acc, row) => {
@@ -1544,6 +1558,7 @@
             <td>${formatMoney(row.rate)}%</td>
             <td class="num">${moneyCell(row.charge, "money-charge")}</td>
             <td class="num">${moneyCell(-row.payout, "money-payout")}</td>
+            <td>${makerAccountBySymbol[row.symbol] || "-"}</td>
             <td class="num">${moneyCell(row.maker, "money-maker")}</td>
             <td><button class="link-button" type="button" data-detail-date="${row.date}" data-detail-time="${row.time}" data-detail-symbol="${row.symbol}">资金明细</button></td>
           </tr>
@@ -1571,7 +1586,7 @@
     function billTypeLabel(type) {
       if (type === "charge") return "对用户收取";
       if (type === "payout") return "对用户支出";
-      return "做市收取";
+      return "做市收支";
     }
 
     function billTypeClass(type) {
@@ -1624,7 +1639,6 @@
         return `
           <tr>
             <td>${index + 1}</td>
-            <td>${row.recordId}</td>
             <td>${row.symbol}</td>
             <td>${row.uid}</td>
             <td>${row.date}</td>
@@ -1635,6 +1649,7 @@
             <td>${formatMoney(row.rate)}%</td>
             <td class="num">${moneyCell(row.billType === "payout" ? -row.fee : row.fee, row.billType === "payout" ? "money-payout" : row.billType === "maker" ? "money-maker" : "money-charge")}</td>
             <td><span class="tag ${billTypeClass(row.billType)}">${billTypeLabel(row.billType)}</span></td>
+            <td>${row.recordId}</td>
           </tr>
         `;
       }).join("");
@@ -1657,7 +1672,8 @@
 
     function syncSummaryState() {
       summaryState.symbol = $("summarySymbol").value;
-      summaryState.date = $("summaryDate").value;
+      summaryState.startDate = $("summaryStartDate").value;
+      summaryState.endDate = $("summaryEndDate").value;
     }
 
     function syncDetailState() {
@@ -1736,7 +1752,8 @@
     $("summaryExport").addEventListener("click", () => showToast("导出入口已预留"));
     $("summaryReset").addEventListener("click", () => {
       $("summarySymbol").value = "";
-      $("summaryDate").value = "2026-05-19";
+      $("summaryStartDate").value = "2026-05-19";
+      $("summaryEndDate").value = "2026-05-19";
       syncSummaryState();
       renderSummary();
       showToast("汇总筛选已重置");
